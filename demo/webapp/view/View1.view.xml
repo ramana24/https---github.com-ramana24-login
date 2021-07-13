@@ -1,0 +1,26 @@
+<mvc:View
+    controllerName="ux.demo.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+	xmlns:viz ="sap.viz.ui5"
+>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+                     <Text text="Lets learn SAP Fiori" ></Text>
+
+
+       <viz:VizFrame>
+
+
+         </viz:VizFrame>
+
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

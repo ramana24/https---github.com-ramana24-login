@@ -1,0 +1,56 @@
+/* external css - element */
+body {
+    background-color: rgb(0, 3, 194);
+  }
+  
+  
+  h2 {
+    color: rgb(150, 26, 26);
+    text-align: center;
+  }
+  
+  p {
+    font-family: cursive;
+    font-size: 20px;
+    color: greenyellow;
+  }
+
+  /* external css - grouping */
+
+  h3 {
+    color: rgb(8, 0, 0);
+    text-align: end;
+  }
+
+   /* external css - Universal
+
+   * {
+    font-family: cursive;
+    font-size: 30px;
+    color: greenyellow;
+  }
+ */ 
+  /* external css - Based on Id */ 
+  #productid {
+    font-family: cursive;
+    font-size: 20px;
+    color: turquoise;
+  }
+
+   /* external css - Based on class  we define CSS classes like "sapUiTinyMargin" and reuse and required places  */ 
+  .UICursive {
+    font-family: cursive;
+    font-size: 20px;
+    color:rgb(172, 27, 27);
+  }
+  .mystylesheet{
+    color: red;
+  }
+  .sapUiBrand{
+    color : #d1ad0a;
+  }
+
+  *{
+    color:red;
+
+  }
