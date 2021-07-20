@@ -1,0 +1,24 @@
+Fiori -  fragments,formatter, CRUD, excel, upload- 80%
+
+Odata queries - fitler,orderby,expand-
+
+_________________________________
+
+Fiori elements(read)- CDS View (server side)
+
+Wizard
+
+______________________________________
+
+ABAP - segw (ABAP - data from db- ztable-(intensive- SQL)) 10000
+--------
+HANA- CDS View(odata:publish : odata service .ABAP  1lKP sala > 1000, - SQL Queries - data base - Open SQL-)
+
+
+SAP CAP / RAP-- New 
+
+
+
+___________________________________
+
+AI - ML(automate- fiori), NLP (CI - Co-piot-- early)

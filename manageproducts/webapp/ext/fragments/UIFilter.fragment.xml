@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:core="sap.ui.core">
+<smartfilterbar:ControlConfiguration groupId="_BASIC" 
+    key="MainCategoryId"
+    label="Category"
+    visibleInAdvancedArea="true">
+    <smartfilterbar:customControl>
+        <ComboBox id="idCategory">
+        <core:Item key="0" text="Files Binders"/>
+        <core:Item key="1" text="Notes"/>
+        <core:Item key="2" text="Clippers"/>
+    </ComboBox>
+    </smartfilterbar:customControl>
+</smartfilterbar:ControlConfiguration>
+</core:FragmentDefinition>
