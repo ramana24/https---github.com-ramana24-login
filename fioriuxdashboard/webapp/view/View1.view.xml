@@ -1,0 +1,80 @@
+<mvc:View controllerName="ux.fioriuxdashboard.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+
+						<VBox>
+
+							<HBox>
+								<!-- <Label text="Section 1" /> -->
+
+	               <Image class="sapUiTinyMarginBeginEnd sapUiSmallMarginTopBottom"
+					src="https://www.adityabirla.com/assets/images/logo.jpg"
+					densityAware="false"
+					width="149px" 
+					height="91px"/>
+					
+					<VBox class="sapUiTinyMarginBeginEnd sapUiSmallMarginTopBottom">
+					<Title text="{i18n>CriticalSystems}"></Title>
+
+					<Text text="CRM,SRM"></Text>
+					</VBox>
+
+					<VBox class="sapUiLargeMarginBeginEnd sapUiSmallMarginTopBottom">
+					<Title text="Systems Under Maintenance"></Title>
+
+					<Text text="ECC"></Text>
+					</VBox>
+
+					<DatePicker 
+			id="DP11"
+			value="2015-11-23"
+		
+			displayFormat="d MMM y"
+			change="handleChange"
+			class="sapUiSmallMarginBottom"/>
+		
+
+
+
+							</HBox>
+
+							<HBox>
+
+								<!-- <Label text="Section 2" /> -->
+
+									<IconTabBar
+		id="idIconTabBarMulti"
+		expanded="{device>/isNoPhone}"
+		class="sapUiResponsiveContentPadding">
+		<items>
+			<IconTabFilter icon="sap-icon://hint" text="Dashboard" key="info">
+				<Text text="Info content goes here ..." />
+			</IconTabFilter>
+			<IconTabFilter
+				icon="sap-icon://attachment"
+				key="attachments"
+				text="Reports">
+				<Text text="Attachments go here ..." />
+			</IconTabFilter>
+		
+		</items>
+	</IconTabBar>
+							</HBox>
+							<HBox>
+
+								<Label text="Section 3" />
+							</HBox>
+
+
+						</VBox>
+
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
