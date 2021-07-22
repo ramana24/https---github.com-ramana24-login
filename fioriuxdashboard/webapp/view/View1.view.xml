@@ -1,5 +1,5 @@
 <mvc:View controllerName="ux.fioriuxdashboard.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-	xmlns="sap.m">
+	xmlns="sap.m" xmlns:f="sap.ui.layout.form">
 	<Shell id="shell">
 		<App id="app">
 			<pages>
@@ -11,63 +11,473 @@
 							<HBox>
 								<!-- <Label text="Section 1" /> -->
 
-	               <Image class="sapUiTinyMarginBeginEnd sapUiSmallMarginTopBottom"
-					src="https://www.adityabirla.com/assets/images/logo.jpg"
-					densityAware="false"
-					width="149px" 
-					height="91px"/>
-					
-					<VBox class="sapUiTinyMarginBeginEnd sapUiSmallMarginTopBottom">
-					<Title text="{i18n>CriticalSystems}"></Title>
+								<Image class="sapUiTinyMarginBeginEnd sapUiSmallMarginTopBottom"
+									src="https://www.adityabirla.com/assets/images/logo.jpg" densityAware="false"
+									width="149px" height="auto" />
 
-					<Text text="CRM,SRM"></Text>
-					</VBox>
+								<VBox class="HeaderTile1 sapUiTinyMarginBeginEnd sapUiSmallMarginTopBottom">
+									<Title clas="HeaderTileText1" text="{i18n>CriticalSystems}"></Title>
 
-					<VBox class="sapUiLargeMarginBeginEnd sapUiSmallMarginTopBottom">
-					<Title text="Systems Under Maintenance"></Title>
+									<Text class="HeaderTileStatusText1" text="CRM,SRM,SF,Ariba"></Text>
+								</VBox>
 
-					<Text text="ECC"></Text>
-					</VBox>
+								<VBox class="HeaderTile1 sapUiLargeMarginBeginEnd sapUiSmallMarginTopBottom">
+									<Title class="HeaderTileText1" text="Systems Under Maintenance"></Title>
 
-					<DatePicker 
-			id="DP11"
-			value="2015-11-23"
-		
-			displayFormat="d MMM y"
-			change="handleChange"
-			class="sapUiSmallMarginBottom"/>
-		
+									<Text class="HeaderTileStatusText1" text="ECC"></Text>
+								</VBox>
+
+								<DatePicker id="DP11" value="2015-11-23" displayFormat="d MMM y" change="handleChange"
+									class="sapUiSmallMarginBottom" />
+
 
 
 
 							</HBox>
 
-							<HBox>
+							<!-- <HBox> -->
 
-								<!-- <Label text="Section 2" /> -->
+							<!-- <Label text="Section 2" /> -->
 
-									<IconTabBar
-		id="idIconTabBarMulti"
-		expanded="{device>/isNoPhone}"
-		class="sapUiResponsiveContentPadding">
-		<items>
-			<IconTabFilter icon="sap-icon://hint" text="Dashboard" key="info">
-				<Text text="Info content goes here ..." />
-			</IconTabFilter>
-			<IconTabFilter
-				icon="sap-icon://attachment"
-				key="attachments"
-				text="Reports">
-				<Text text="Attachments go here ..." />
-			</IconTabFilter>
-		
-		</items>
-	</IconTabBar>
-							</HBox>
-							<HBox>
+							<IconTabBar id="idIconTabBarMulti" expanded="{device>/isNoPhone}"
+								class="sapUiResponsiveContentPadding">
+								<items>
+									<IconTabFilter icon="sap-icon://Chart-Tree-Map" text="Dashboard" key="dashboard">
+										<ScrollContainer height="100%" width="100%" vertical="true" focusable="true">
+
+
+											<VBox id="idTileContainer">
+
+												<HBox id="Row1">
+<!-- 
+													// CRM Tile - Start -->
+													<f:SimpleForm class="equalColumns1" id="idCRMTile" editable="false"
+														layout="ResponsiveGridLayout" title="CRM" labelSpanXL="3"
+														labelSpanL="3" labelSpanM="3" labelSpanS="12"
+														adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
+														columnsM="1" singleContainerFullSize="false">
+														<f:content>
+															<Label text="Queue Depth" />
+															<NumericContent value="65" scale="MM"
+																class="sapUiSmallMargin" press="press"
+																truncateValueTo="4" />
+
+
+															<List id="idCRMList" headerText="" items="{/Products('AR-FB-1001')}">
+																<items>
+																	<StandardListItem activeIcon="sap-icon://error"
+																		title="System Error" info="{DimensionHeight}"
+																		infoState="Error" />
+																	<StandardListItem
+																		activeIcon="sap-icon://message-error"
+																		title="App Errors" info="78"
+																		infoState="Success" />
+																	<StandardListItem activeIcon="sap-icon://fob-watch"
+																		title="No of Threads" info="56"
+																		infoState="Warning" />
+																</items>
+															</List>
+
+															<HBox>
+																<Label class="sapUiSmallMarginEnd" text="Updated on" />
+																<Text class="sapUiSmallMarginBegin" id="idCRMLastDate"
+																	text="22-07-2021" />
+															</HBox>
+														</f:content>
+													</f:SimpleForm>
+
+	<!-- // CRM Tile- end -->
+
+
+														<!-- // ECC tile - Start -->
+
+											
+													<f:SimpleForm class="equalColumns2" id="idECCTile" editable="false"
+														layout="ResponsiveGridLayout" title="ECC" labelSpanXL="3"
+														labelSpanL="3" labelSpanM="3" labelSpanS="12"
+														adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
+														columnsM="1" singleContainerFullSize="false">
+														<f:content>
+															<Label text="Queue Depth" />
+															<NumericContent value="65" scale="MM"
+																class="sapUiSmallMargin" press="press"
+																truncateValueTo="4" />
+
+
+															<List id="idECCList" headerText="" items="{/Products('AR-FB-1002')}">
+																<items>
+																	<StandardListItem activeIcon="sap-icon://error"
+																		title="System Error" info="{DimensionHeight}"
+																		infoState="Error" />
+																	<StandardListItem
+																		activeIcon="sap-icon://message-error"
+																		title="App Errors" info="78"
+																		infoState="Success" />
+																	<StandardListItem activeIcon="sap-icon://fob-watch"
+																		title="No of Threads" info="56"
+																		infoState="Warning" />
+																</items>
+															</List>
+
+															<HBox>
+																<Label class="sapUiSmallMarginEnd" text="Updated on" />
+																<Text class="sapUiSmallMarginBegin" id="idECCLastDate"
+																	text="22-07-2021" />
+															</HBox>
+														</f:content>
+													</f:SimpleForm>
+
+
+												<!-- // ECC Tile- end -->
+
+	<!-- //  tile - Start -->
+
+											
+													<f:SimpleForm class="equalColumns3" id="idSRMTile" editable="false"
+														layout="ResponsiveGridLayout" title="SRM" labelSpanXL="3"
+														labelSpanL="3" labelSpanM="3" labelSpanS="12"
+														adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
+														columnsM="1" singleContainerFullSize="false">
+														<f:content>
+															<Label text="Queue Depth" />
+															<NumericContent value="65" scale="MM"
+																class="sapUiSmallMargin" press="press"
+																truncateValueTo="4" />
+
+
+															<List id="idSRMList" headerText="" items="{/Products('AR-FB-1002')}">
+																<items>
+																	<StandardListItem activeIcon="sap-icon://error"
+																		title="System Error" info="{DimensionHeight}"
+																		infoState="Error" />
+																	<StandardListItem
+																		activeIcon="sap-icon://message-error"
+																		title="App Errors" info="78"
+																		infoState="Success" />
+																	<StandardListItem activeIcon="sap-icon://fob-watch"
+																		title="No of Threads" info="56"
+																		infoState="Warning" />
+																</items>
+															</List>
+
+															<HBox>
+																<Label class="sapUiSmallMarginEnd" text="Updated on" />
+																<Text class="sapUiSmallMarginBegin" id="idSRMLastDate"
+																	text="22-07-2021" />
+															</HBox>
+														</f:content>
+													</f:SimpleForm>
+
+
+												<!-- // SRM Tile- end -->
+
+
+
+												</HBox>
+
+
+												<HBox id="Row2">
+<!-- 
+													// PLM Tile - Start -->
+													<f:SimpleForm class="equalColumns3" id="idPLMTile" editable="false"
+														layout="ResponsiveGridLayout" title="PLM" labelSpanXL="3"
+														labelSpanL="3" labelSpanM="3" labelSpanS="12"
+														adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
+														columnsM="1" singleContainerFullSize="false">
+														<f:content>
+															<Label text="Queue Depth" />
+															<NumericContent value="65" scale="MM"
+																class="sapUiSmallMargin" press="press"
+																truncateValueTo="4" />
+
+
+															<List id="idPLMList" headerText="" items="{/Products('AR-FB-1001')}">
+																<items>
+																	<StandardListItem activeIcon="sap-icon://error"
+																		title="System Error" info="{DimensionHeight}"
+																		infoState="Error" />
+																	<StandardListItem
+																		activeIcon="sap-icon://message-error"
+																		title="App Errors" info="78"
+																		infoState="Success" />
+																	<StandardListItem activeIcon="sap-icon://fob-watch"
+																		title="No of Threads" info="56"
+																		infoState="Warning" />
+																</items>
+															</List>
+
+															<HBox>
+																<Label class="sapUiSmallMarginEnd" text="Updated on" />
+																<Text class="sapUiSmallMarginBegin" id="idPLMLastDate"
+																	text="22-07-2021" />
+															</HBox>
+														</f:content>
+													</f:SimpleForm>
+
+	<!-- // PLM Tile- end -->
+
+
+														<!-- // SF tile - Start -->
+
+											
+													<f:SimpleForm class="equalColumns2" id="idSFTile" editable="false"
+														layout="ResponsiveGridLayout" title="Salesforce" labelSpanXL="3"
+														labelSpanL="3" labelSpanM="3" labelSpanS="12"
+														adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
+														columnsM="1" singleContainerFullSize="false">
+														<f:content>
+															<Label text="Queue Depth" />
+															<NumericContent value="65" scale="MM"
+																class="sapUiSmallMargin" press="press"
+																truncateValueTo="4" />
+
+
+															<List id="idSFList" headerText="" items="{/Products('AR-FB-1002')}">
+																<items>
+																	<StandardListItem activeIcon="sap-icon://error"
+																		title="System Error" info="{DimensionHeight}"
+																		infoState="Error" />
+																	<StandardListItem
+																		activeIcon="sap-icon://message-error"
+																		title="App Errors" info="78"
+																		infoState="Success" />
+																	<StandardListItem activeIcon="sap-icon://fob-watch"
+																		title="No of Threads" info="56"
+																		infoState="Warning" />
+																</items>
+															</List>
+
+															<HBox>
+																<Label class="sapUiSmallMarginEnd" text="Updated on" />
+																<Text class="sapUiSmallMarginBegin" id="idSFLastDate"
+																	text="22-07-2021" />
+															</HBox>
+														</f:content>
+													</f:SimpleForm>
+
+
+												<!-- // SF Tile- end -->
+
+	<!-- //  tile - Start -->
+
+											
+													<f:SimpleForm class="equalColumns1" id="idConcurTile" editable="false"
+														layout="ResponsiveGridLayout" title="Concur" labelSpanXL="3"
+														labelSpanL="3" labelSpanM="3" labelSpanS="12"
+														adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
+														columnsM="1" singleContainerFullSize="false">
+														<f:content>
+															<Label text="Queue Depth" />
+															<NumericContent value="65" scale="MM"
+																class="sapUiSmallMargin" press="press"
+																truncateValueTo="4" />
+
+
+															<List id="idConcurList" headerText="" items="{/Products('AR-FB-1002')}">
+																<items>
+																	<StandardListItem activeIcon="sap-icon://error"
+																		title="System Error" info="{DimensionHeight}"
+																		infoState="Error" />
+																	<StandardListItem
+																		activeIcon="sap-icon://message-error"
+																		title="App Errors" info="78"
+																		infoState="Success" />
+																	<StandardListItem activeIcon="sap-icon://fob-watch"
+																		title="No of Threads" info="56"
+																		infoState="Warning" />
+																</items>
+															</List>
+
+															<HBox>
+																<Label class="sapUiSmallMarginEnd" text="Updated on" />
+																<Text class="sapUiSmallMarginBegin" id="idConcurLastDate"
+																	text="22-07-2021" />
+															</HBox>
+														</f:content>
+													</f:SimpleForm>
+
+
+												<!-- // Concur Tile- end -->
+
+
+
+												</HBox>
+
+											
+<HBox id="Row3">
+<!-- 
+													// BW Tile - Start -->
+													<f:SimpleForm class="equalColumns1" id="idBWTile" editable="false"
+														layout="ResponsiveGridLayout" title="BW" labelSpanXL="3"
+														labelSpanL="3" labelSpanM="3" labelSpanS="12"
+														adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
+														columnsM="1" singleContainerFullSize="false">
+														<f:content>
+															<Label text="Queue Depth" />
+															<NumericContent value="65" scale="MM"
+																class="sapUiSmallMargin" press="press"
+																truncateValueTo="4" />
+
+
+															<List id="idBWList" headerText="" items="{/Products('AR-FB-1001')}">
+																<items>
+																	<StandardListItem activeIcon="sap-icon://error"
+																		title="System Error" info="{DimensionHeight}"
+																		infoState="Error" />
+																	<StandardListItem
+																		activeIcon="sap-icon://message-error"
+																		title="App Errors" info="78"
+																		infoState="Success" />
+																	<StandardListItem activeIcon="sap-icon://fob-watch"
+																		title="No of Threads" info="56"
+																		infoState="Warning" />
+																</items>
+															</List>
+
+															<HBox>
+																<Label class="sapUiSmallMarginEnd" text="Updated on" />
+																<Text class="sapUiSmallMarginBegin" id="idBWLastDate"
+																	text="22-07-2021" />
+															</HBox>
+														</f:content>
+													</f:SimpleForm>
+
+	<!-- // BW Tile- end -->
+
+
+														<!-- // Ariba tile - Start -->
+
+											
+													<f:SimpleForm class="equalColumns2" id="idAribaTile" editable="false"
+														layout="ResponsiveGridLayout" title="Ariba" labelSpanXL="3"
+														labelSpanL="3" labelSpanM="3" labelSpanS="12"
+														adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
+														columnsM="1" singleContainerFullSize="false">
+														<f:content>
+															<Label text="Queue Depth" />
+															<NumericContent value="65" scale="MM"
+																class="sapUiSmallMargin" press="press"
+																truncateValueTo="4" />
+
+
+															<List id="idAribaList" headerText="" items="{/Products('AR-FB-1002')}">
+																<items>
+																	<StandardListItem activeIcon="sap-icon://error"
+																		title="System Error" info="{DimensionHeight}"
+																		infoState="Error" />
+																	<StandardListItem
+																		activeIcon="sap-icon://message-error"
+																		title="App Errors" info="78"
+																		infoState="Success" />
+																	<StandardListItem activeIcon="sap-icon://fob-watch"
+																		title="No of Threads" info="56"
+																		infoState="Warning" />
+																</items>
+															</List>
+
+															<HBox>
+																<Label class="sapUiSmallMarginEnd" text="Updated on" />
+																<Text class="sapUiSmallMarginBegin" id="idAribaLastDate"
+																	text="22-07-2021" />
+															</HBox>
+														</f:content>
+													</f:SimpleForm>
+
+
+												<!-- // Ariba Tile- end -->
+
+	<!-- //  tile - Start -->
+
+											
+													<f:SimpleForm class="equalColumns3" id="idFieldGlassTile" editable="false"
+														layout="ResponsiveGridLayout" title="FieldGlass" labelSpanXL="3"
+														labelSpanL="3" labelSpanM="3" labelSpanS="12"
+														adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
+														columnsM="1" singleContainerFullSize="false">
+														<f:content>
+															<Label text="Queue Depth" />
+															<NumericContent value="65" scale="MM"
+																class="sapUiSmallMargin" press="press"
+																truncateValueTo="4" />
+
+
+															<List id="idFieldGlassList" headerText="" items="{/Products('AR-FB-1002')}">
+																<items>
+																	<StandardListItem activeIcon="sap-icon://error"
+																		title="System Error" info="{DimensionHeight}"
+																		infoState="Error" />
+																	<StandardListItem
+																		activeIcon="sap-icon://message-error"
+																		title="App Errors" info="78"
+																		infoState="Success" />
+																	<StandardListItem activeIcon="sap-icon://fob-watch"
+																		title="No of Threads" info="56"
+																		infoState="Warning" />
+																</items>
+															</List>
+
+															<HBox>
+																<Label class="sapUiSmallMarginEnd" text="Updated on" />
+																<Text class="sapUiSmallMarginBegin" id="idFieldGlassLastDate"
+																	text="22-07-2021" />
+															</HBox>
+														</f:content>
+													</f:SimpleForm>
+
+
+												<!-- // FieldGlass Tile- end -->
+
+
+
+												</HBox>
+
+											
+											
+
+
+											
+											</VBox>
+
+
+
+
+
+
+
+
+
+
+
+										</ScrollContainer>
+
+
+
+
+
+
+
+									</IconTabFilter>
+									<IconTabFilter icon="sap-icon://business-objects-experience" key="reports"
+										text="Reports">
+
+									</IconTabFilter>
+
+								</items>
+							</IconTabBar>
+							<!-- </HBox> -->
+							<!-- <HBox>
 
 								<Label text="Section 3" />
-							</HBox>
+							</HBox> -->
 
 
 						</VBox>
