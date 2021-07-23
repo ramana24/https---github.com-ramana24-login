@@ -16,7 +16,7 @@
 									width="149px" height="auto" />
 
 								<VBox class="HeaderTile1 sapUiTinyMarginBeginEnd sapUiSmallMarginTopBottom">
-									<Title clas="HeaderTileText1" text="{i18n>CriticalSystems}"></Title>
+									<Title class="HeaderTileText1" text="{i18n>CriticalSystems}"></Title>
 
 									<Text class="HeaderTileStatusText1" text="CRM,SRM,SF,Ariba"></Text>
 								</VBox>
@@ -58,23 +58,25 @@
 														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
 														columnsM="1" singleContainerFullSize="false">
 														<f:content>
+
+														<VBox id="crmcontainer">
 															<Label text="Queue Depth" />
-															<NumericContent value="65" scale="MM"
+															<NumericContent value="{CRM>/d/WeightMeasure}" scale="MM"
 																class="sapUiSmallMargin" press="press"
 																truncateValueTo="4" />
 
 
-															<List id="idCRMList" headerText="" items="{/Products('AR-FB-1001')}">
+															<List id="idCRMList">
 																<items>
-																	<StandardListItem activeIcon="sap-icon://error"
-																		title="System Error" info="{DimensionHeight}"
+																	<StandardListItem activeIcon="sap-icon://error" type="Active"
+																		title="System Error" info="{CRM>/d/DimensionHeight}"
 																		infoState="Error" />
 																	<StandardListItem
-																		activeIcon="sap-icon://message-error"
-																		title="App Errors" info="78"
+																		activeIcon="sap-icon://message-error" type="Active"
+																		title="App Errors" info="{CRM>/d/DimensionWidth}"
 																		infoState="Success" />
-																	<StandardListItem activeIcon="sap-icon://fob-watch"
-																		title="No of Threads" info="56"
+																	<StandardListItem activeIcon="sap-icon://fob-watch" type="Active"
+																		title="No of Threads" info="{CRM>/d/DimensionDepth}"
 																		infoState="Warning" />
 																</items>
 															</List>
@@ -84,6 +86,7 @@
 																<Text class="sapUiSmallMarginBegin" id="idCRMLastDate"
 																	text="22-07-2021" />
 															</HBox>
+															</VBox>
 														</f:content>
 													</f:SimpleForm>
 
@@ -100,23 +103,25 @@
 														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
 														columnsM="1" singleContainerFullSize="false">
 														<f:content>
+
+														<VBox id="ECCContainer">
 															<Label text="Queue Depth" />
-															<NumericContent value="65" scale="MM"
+															<NumericContent value="{WeightMeasure}" scale="MM"
 																class="sapUiSmallMargin" press="press"
 																truncateValueTo="4" />
 
 
-															<List id="idECCList" headerText="" items="{/Products('AR-FB-1002')}">
+															<List id="idECCList">
 																<items>
 																	<StandardListItem activeIcon="sap-icon://error"
 																		title="System Error" info="{DimensionHeight}"
 																		infoState="Error" />
 																	<StandardListItem
 																		activeIcon="sap-icon://message-error"
-																		title="App Errors" info="78"
+																		title="App Errors" info="{DimensionWidth}"
 																		infoState="Success" />
 																	<StandardListItem activeIcon="sap-icon://fob-watch"
-																		title="No of Threads" info="56"
+																		title="No of Threads" info="{DimensionDepth}"
 																		infoState="Warning" />
 																</items>
 															</List>
@@ -126,6 +131,8 @@
 																<Text class="sapUiSmallMarginBegin" id="idECCLastDate"
 																	text="22-07-2021" />
 															</HBox>
+
+															</VBox>
 														</f:content>
 													</f:SimpleForm>
 
@@ -142,23 +149,24 @@
 														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
 														columnsM="1" singleContainerFullSize="false">
 														<f:content>
+														<VBox id="idSRMContainer">
 															<Label text="Queue Depth" />
-															<NumericContent value="65" scale="MM"
+															<NumericContent value="{WeightMeasure}" scale="MM"
 																class="sapUiSmallMargin" press="press"
 																truncateValueTo="4" />
 
 
-															<List id="idSRMList" headerText="" items="{/Products('AR-FB-1002')}">
+															<List id="idSRMList">
 																<items>
-																	<StandardListItem activeIcon="sap-icon://error"
+																	<StandardListItem activeIcon="sap-icon://error" type="Active"
 																		title="System Error" info="{DimensionHeight}"
 																		infoState="Error" />
 																	<StandardListItem
 																		activeIcon="sap-icon://message-error"
-																		title="App Errors" info="78"
+																		title="App Errors" info="{DimensionWidth}"
 																		infoState="Success" />
 																	<StandardListItem activeIcon="sap-icon://fob-watch"
-																		title="No of Threads" info="56"
+																		title="No of Threads" info="{DimensionDepth}"
 																		infoState="Warning" />
 																</items>
 															</List>
@@ -168,6 +176,7 @@
 																<Text class="sapUiSmallMarginBegin" id="idSRMLastDate"
 																	text="22-07-2021" />
 															</HBox>
+															</VBox>
 														</f:content>
 													</f:SimpleForm>
 
