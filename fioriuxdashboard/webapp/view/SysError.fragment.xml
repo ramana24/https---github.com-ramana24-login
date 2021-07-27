@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <Dialog id="idSysError" contentHeight="40%" contentWidth="60%" draggable="true" resizable="true">
+<content>
+<Label text="Contact Email"></Label>
+
+<Text text="{SError>/d/results/1/Email}"/>
+</content>
+<beginButton>
+<Button text="Close" typ="Reject" press="onClose"></Button>
+</beginButton>
+</Dialog>
+</core:FragmentDefinition>

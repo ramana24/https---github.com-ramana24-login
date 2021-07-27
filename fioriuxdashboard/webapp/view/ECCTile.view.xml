@@ -1,0 +1,43 @@
+<mvc:View
+   controllerName="ux.fioriuxdashboard.controller.Tile"
+   xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+   xmlns:mvc="sap.ui.core.mvc">
+
+<f:SimpleForm class="equalColumns3" id="idFieldGlassTile" editable="false"
+														layout="ResponsiveGridLayout" title="FieldGlass" labelSpanXL="3"
+														labelSpanL="3" labelSpanM="3" labelSpanS="12"
+														adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
+														columnsM="1" singleContainerFullSize="false">
+														<f:content>
+															<Label text="Queue Depth" />
+															<NumericContent value="65" scale="MM"
+																class="sapUiSmallMargin" press="press"
+																truncateValueTo="4" />
+
+
+															<List id="idFieldGlassList" headerText="" items="{/Products('AR-FB-1002')}">
+																<items>
+																	<StandardListItem activeIcon="sap-icon://error"
+																		title="System Error" info="{DimensionHeight}"
+																		infoState="Error" />
+																	<StandardListItem
+																		activeIcon="sap-icon://message-error"
+																		title="App Errors" info="78"
+																		infoState="Success" />
+																	<StandardListItem activeIcon="sap-icon://fob-watch"
+																		title="No of Threads" info="56"
+																		infoState="Warning" />
+																</items>
+															</List>
+
+															<HBox>
+																<Label class="sapUiSmallMarginEnd" text="Updated on" />
+																<Text class="sapUiSmallMarginBegin" id="idFieldGlassLastDate"
+																	text="22-07-2021" />
+															</HBox>
+														</f:content>
+													</f:SimpleForm>
+
+
+   </mvc:View>

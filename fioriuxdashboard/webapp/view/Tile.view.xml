@@ -1,0 +1,27 @@
+<mvc:View
+   controllerName="ux.fioriuxdashboard.controller.Tile"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc">
+   
+     <FormattedText
+            htmlText="Good Morning! "
+            class="sapUiSmallMargin sapThemeHighlight-asColor myCustomText"/>
+   <Panel
+      headerText="{i18n>helloPanelTitle}"
+      class="sapUiResponsiveMargin"
+      width="auto" >
+      <content>
+         <!-- <Button
+            text="{i18n>showHelloButtonText}"
+            press=".onShowHello"
+            class="myCustomButton"/>
+         <Input
+            value="{/recipient/name}"
+            valueLiveUpdate="true"
+            width="60%"/> -->
+       
+      </content>
+   </Panel>
+
+
+</mvc:View>

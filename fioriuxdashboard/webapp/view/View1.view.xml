@@ -1,5 +1,17 @@
 <mvc:View controllerName="ux.fioriuxdashboard.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-	xmlns="sap.m" xmlns:f="sap.ui.layout.form">
+	xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+
+
+	xmlns:viz="sap.viz.ui5.controls" 
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+	xmlns:viz.data="sap.viz.ui5.data" 
+
+	xmlns:chart="sap.suite.ui.commons"
+
+	xmlns:c="sap.suite.ui.microchart"
+	
+	
+	>
 	<Shell id="shell">
 		<App id="app">
 			<pages>
@@ -29,8 +41,8 @@
 
 								<DatePicker id="DP11" value="2015-11-23" displayFormat="d MMM y" change="handleChange"
 									class="sapUiSmallMarginBottom" />
-
-
+<!-- Nested View -->
+           <!-- <mvc:XMLView viewName="ux.fioriuxdashboard.view.Tile"/> -->
 
 
 							</HBox>
@@ -68,7 +80,7 @@
 
 															<List id="idCRMList">
 																<items>
-																	<StandardListItem activeIcon="sap-icon://error" type="Active"
+																	<StandardListItem activeIcon="sap-icon://error" type="Active" press="onOpenSystemErrors"
 																		title="System Error" info="{CRM>/d/DimensionHeight}"
 																		infoState="Error" />
 																	<StandardListItem
@@ -198,13 +210,14 @@
 														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
 														columnsM="1" singleContainerFullSize="false">
 														<f:content>
+														<VBox id="PLMContainer">
 															<Label text="Queue Depth" />
 															<NumericContent value="65" scale="MM"
 																class="sapUiSmallMargin" press="press"
 																truncateValueTo="4" />
 
 
-															<List id="idPLMList" headerText="" items="{/Products('AR-FB-1001')}">
+															<List id="idPLMList">
 																<items>
 																	<StandardListItem activeIcon="sap-icon://error"
 																		title="System Error" info="{DimensionHeight}"
@@ -224,7 +237,9 @@
 																<Text class="sapUiSmallMarginBegin" id="idPLMLastDate"
 																	text="22-07-2021" />
 															</HBox>
+															</VBox>
 														</f:content>
+													
 													</f:SimpleForm>
 
 	<!-- // PLM Tile- end -->
@@ -240,23 +255,25 @@
 														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
 														columnsM="1" singleContainerFullSize="false">
 														<f:content>
+
+														<VBox id="SFContainer">
 															<Label text="Queue Depth" />
-															<NumericContent value="65" scale="MM"
+															<NumericContent value="{SF>/d/WeightMeasure}" scale="MM"
 																class="sapUiSmallMargin" press="press"
 																truncateValueTo="4" />
 
 
-															<List id="idSFList" headerText="" items="{/Products('AR-FB-1002')}">
+															<List id="idSFList">
 																<items>
 																	<StandardListItem activeIcon="sap-icon://error"
-																		title="System Error" info="{DimensionHeight}"
+																		title="System Error" info="{SF>/d/DimensionHeight}"
 																		infoState="Error" />
 																	<StandardListItem
 																		activeIcon="sap-icon://message-error"
-																		title="App Errors" info="78"
+																		title="App Errors" info="{SF>/d/DimensionWidth}"
 																		infoState="Success" />
 																	<StandardListItem activeIcon="sap-icon://fob-watch"
-																		title="No of Threads" info="56"
+																		title="No of Threads" info="{SF>/d/DimensionDepth}"
 																		infoState="Warning" />
 																</items>
 															</List>
@@ -264,8 +281,10 @@
 															<HBox>
 																<Label class="sapUiSmallMarginEnd" text="Updated on" />
 																<Text class="sapUiSmallMarginBegin" id="idSFLastDate"
-																	text="22-07-2021" />
+																	text="{path:'SF>/d/LastModified' , formatter: '.Formatter.formatJSONDate'}" />
 															</HBox>
+
+															</VBox>
 														</f:content>
 													</f:SimpleForm>
 
@@ -282,23 +301,24 @@
 														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
 														columnsM="1" singleContainerFullSize="false">
 														<f:content>
+														<VBox id="concurContainer">
 															<Label text="Queue Depth" />
-															<NumericContent value="65" scale="MM"
+															<NumericContent value="{Concur>/d/WeightMeasure}" scale="MM"
 																class="sapUiSmallMargin" press="press"
 																truncateValueTo="4" />
 
 
-															<List id="idConcurList" headerText="" items="{/Products('AR-FB-1002')}">
+															<List id="idConcurList">
 																<items>
 																	<StandardListItem activeIcon="sap-icon://error"
-																		title="System Error" info="{DimensionHeight}"
+																		title="System Error" info="{Concur>/d/DimensionHeight}"
 																		infoState="Error" />
 																	<StandardListItem
 																		activeIcon="sap-icon://message-error"
-																		title="App Errors" info="78"
+																		title="App Errors" info="{Concur>/d/DimensionWidth}"
 																		infoState="Success" />
 																	<StandardListItem activeIcon="sap-icon://fob-watch"
-																		title="No of Threads" info="56"
+																		title="No of Threads" info="{Concur>/d/DimensionDepth}"
 																		infoState="Warning" />
 																</items>
 															</List>
@@ -306,10 +326,13 @@
 															<HBox>
 																<Label class="sapUiSmallMarginEnd" text="Updated on" />
 																<Text class="sapUiSmallMarginBegin" id="idConcurLastDate"
-																	text="22-07-2021" />
+																	text="{path:'Concur>/d/LastModified' , formatter: '.Formatter.formatJSONDate'}"  />
 															</HBox>
+
+															</VBox>
 														</f:content>
 													</f:SimpleForm>
+													
 
 
 												<!-- // Concur Tile- end -->
@@ -329,23 +352,25 @@
 														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
 														columnsM="1" singleContainerFullSize="false">
 														<f:content>
+
+														<VBox id="idBWContainer">
 															<Label text="Queue Depth" />
-															<NumericContent value="65" scale="MM"
+															<NumericContent value="{BW>/d/WeightMeasure}" scale="MM"
 																class="sapUiSmallMargin" press="press"
 																truncateValueTo="4" />
 
 
-															<List id="idBWList" headerText="" items="{/Products('AR-FB-1001')}">
+															<List id="idBWList">
 																<items>
 																	<StandardListItem activeIcon="sap-icon://error"
-																		title="System Error" info="{DimensionHeight}"
+																		title="System Error" info="{BW>/d/DimensionHeight}"
 																		infoState="Error" />
 																	<StandardListItem
 																		activeIcon="sap-icon://message-error"
-																		title="App Errors" info="78"
+																		title="App Errors" info="{BW>/d/DimensionWidth}"
 																		infoState="Success" />
 																	<StandardListItem activeIcon="sap-icon://fob-watch"
-																		title="No of Threads" info="56"
+																		title="No of Threads" info="{BW>/d/DimensionDepth}"
 																		infoState="Warning" />
 																</items>
 															</List>
@@ -355,6 +380,8 @@
 																<Text class="sapUiSmallMarginBegin" id="idBWLastDate"
 																	text="22-07-2021" />
 															</HBox>
+
+															</VBox>
 														</f:content>
 													</f:SimpleForm>
 
@@ -371,23 +398,25 @@
 														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
 														columnsM="1" singleContainerFullSize="false">
 														<f:content>
+
+														<VBox id="idAribaContainer">
 															<Label text="Queue Depth" />
-															<NumericContent value="65" scale="MM"
+															<NumericContent value="{Ariba>/d/WeightMeasure}" scale="MM"
 																class="sapUiSmallMargin" press="press"
 																truncateValueTo="4" />
 
 
-															<List id="idAribaList" headerText="" items="{/Products('AR-FB-1002')}">
+															<List id="idAribaList">
 																<items>
 																	<StandardListItem activeIcon="sap-icon://error"
-																		title="System Error" info="{DimensionHeight}"
+																		title="System Error" info="{Ariba>/d/DimensionHeight}"
 																		infoState="Error" />
 																	<StandardListItem
 																		activeIcon="sap-icon://message-error"
-																		title="App Errors" info="78"
+																		title="App Errors" info="{Ariba>/d/DimensionWidth}"
 																		infoState="Success" />
 																	<StandardListItem activeIcon="sap-icon://fob-watch"
-																		title="No of Threads" info="56"
+																		title="No of Threads" info="{Ariba>/d/DimensionDepth}"
 																		infoState="Warning" />
 																</items>
 															</List>
@@ -397,6 +426,7 @@
 																<Text class="sapUiSmallMarginBegin" id="idAribaLastDate"
 																	text="22-07-2021" />
 															</HBox>
+															</VBox>
 														</f:content>
 													</f:SimpleForm>
 
@@ -405,31 +435,34 @@
 
 	<!-- //  tile - Start -->
 
-											
-													<f:SimpleForm class="equalColumns3" id="idFieldGlassTile" editable="false"
+		<!-- Nested View -->
+           <!-- <mvc:XMLView viewName="ux.fioriuxdashboard.view.ECCTile"/>									 -->
+													
+<f:SimpleForm class="equalColumns3" id="idFieldGlassTile" editable="false"
 														layout="ResponsiveGridLayout" title="FieldGlass" labelSpanXL="3"
 														labelSpanL="3" labelSpanM="3" labelSpanS="12"
 														adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
 														emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1"
 														columnsM="1" singleContainerFullSize="false">
 														<f:content>
+														<VBox id="idFGContainer">
 															<Label text="Queue Depth" />
-															<NumericContent value="65" scale="MM"
+															<NumericContent value="{FG>/d/WeightMeasure}" scale="MM"
 																class="sapUiSmallMargin" press="press"
 																truncateValueTo="4" />
 
 
-															<List id="idFieldGlassList" headerText="" items="{/Products('AR-FB-1002')}">
+															<List id="idFieldGlassList" >
 																<items>
 																	<StandardListItem activeIcon="sap-icon://error"
-																		title="System Error" info="{DimensionHeight}"
+																		title="System Error" info="{FG>/d/DimensionHeight}"
 																		infoState="Error" />
 																	<StandardListItem
 																		activeIcon="sap-icon://message-error"
-																		title="App Errors" info="78"
+																		title="App Errors" info="{FG>/d/DimensionWidth}"
 																		infoState="Success" />
 																	<StandardListItem activeIcon="sap-icon://fob-watch"
-																		title="No of Threads" info="56"
+																		title="No of Threads" info="{FG>/d/DimensionDepth}"
 																		infoState="Warning" />
 																</items>
 															</List>
@@ -439,10 +472,10 @@
 																<Text class="sapUiSmallMarginBegin" id="idFieldGlassLastDate"
 																	text="22-07-2021" />
 															</HBox>
+
+															</VBox>
 														</f:content>
 													</f:SimpleForm>
-
-
 												<!-- // FieldGlass Tile- end -->
 
 
@@ -478,6 +511,33 @@
 									<IconTabFilter icon="sap-icon://business-objects-experience" key="reports"
 										text="Reports">
 
+
+	<chart:ChartContainer
+				id="chartContainer"
+				showFullScreen="true"
+				showPersonalization="false"
+				autoAdjustHeight="false"
+				personalizationPress="attachPersonalizationPress"
+				contentChange="attachContentChange"
+				title="Revenue">
+				<chart:content>
+					<chart:ChartContainerContent
+						icon="sap-icon://line-chart"
+						title="Line Chart">
+						<chart:content>
+							<!-- <viz:VizFrame id="chartContainerVizFrame" height="700px" width="100%"
+							              uiConfig="{applicationSet:'fiori'}"></viz:VizFrame> -->
+
+									
+					<viz:VizFrame id="idVizColumn" width = "800px"
+	height = "400px" vizProperties="{ title: {text : 'Analytics', visible : true}}" xmlns="sap.viz"></viz:VizFrame>
+								 
+						
+
+					</chart:content>
+					</chart:ChartContainerContent>
+				</chart:content>
+			</chart:ChartContainer>
 									</IconTabFilter>
 
 								</items>
