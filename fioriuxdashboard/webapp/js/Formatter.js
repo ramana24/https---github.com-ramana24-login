@@ -3,6 +3,31 @@ sap.ui.define(function() {
 
 	var Formatter = {
 
+
+
+		formatJSONDate:function(Input){
+			if(Input){
+			var dateString = Input.substring(6,19);
+			var currentTime = new Date(parseInt(dateString ));
+			var month = currentTime.getMonth() + 1;
+			var day = currentTime.getDate();
+			var year = currentTime.getFullYear();
+			var hour = currentTime.getHours();
+			var minutes = currentTime.getMinutes();
+			var seconds = currentTime.getSeconds();
+			var date = day + "-" + month + "-" + year +"  "+ hour +":" + minutes +":"+ seconds;	
+		//	var date = "" + hour +":" + minutes +":"+ seconds;
+		//	var date = "" + hour +":" + minutes;
+
+		var date2=  year + "/" + month + "/" + day;
+								return date2;
+			}
+			else
+				{
+				return Input;
+				}
+		},
+
 		weightState :  function (fMeasure, sUnit) {
 
 			// Boarder values for different status of weight
@@ -55,28 +80,7 @@ sap.ui.define(function() {
          			   return inpt;
          		   }
                 },
-                formatJSONDate:function(Input){
-							if(Input){
-							var dateString = Input.substring(6,19);
-							var currentTime = new Date(parseInt(dateString ));
-							var month = currentTime.getMonth() + 1;
-							var day = currentTime.getDate();
-							var year = currentTime.getFullYear();
-							var hour = currentTime.getHours();
-							var minutes = currentTime.getMinutes();
-							var seconds = currentTime.getSeconds();
-							var date = day + "-" + month + "-" + year +"  "+ hour +":" + minutes +":"+ seconds;	
-						//	var date = "" + hour +":" + minutes +":"+ seconds;
-						//	var date = "" + hour +":" + minutes;
-
-                        var date2=  year + "/" + month + "/" + day;
-												return date2;
-							}
-							else
-								{
-								return Input;
-								}
-						},
+               
 						
 						SystemStatus:function(oValue, oThreshold)
 						{

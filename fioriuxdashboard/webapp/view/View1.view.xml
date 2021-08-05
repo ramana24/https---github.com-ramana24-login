@@ -538,6 +538,33 @@
 					</chart:ChartContainerContent>
 				</chart:content>
 			</chart:ChartContainer>
+
+
+									</IconTabFilter>
+									<IconTabFilter  icon="sap-icon://business-objects-experience" key="reports"
+										text="Charts">
+										<chart:ChartContainer
+				id="chartContainer2"
+				showFullScreen="true"
+				showPersonalization="false"
+				autoAdjustHeight="false"
+				personalizationPress="attachPersonalizationPress"
+				contentChange="attachContentChange"
+				title="Revenue">
+				<chart:content>
+					<chart:ChartContainerContent
+						icon="sap-icon://line-chart"
+						title="Line Chart">
+						<chart:content>
+							<!-- <viz:VizFrame id="chartContainerVizFrame" height="700px" width="100%"
+							              uiConfig="{applicationSet:'fiori'}"></viz:VizFrame> -->
+<Text text="Charts"/>
+						
+
+					</chart:content>
+					</chart:ChartContainerContent>
+				</chart:content>
+			</chart:ChartContainer>
 									</IconTabFilter>
 
 								</items>

@@ -192,13 +192,13 @@ var oDataset = new sap.viz.ui5.data.FlattenedDataset({
 });		
 oVizFrame.setDataset(oDataset);
 oVizFrame.setModel(oModel);	
-oVizFrame.setVizType('line');
+oVizFrame.setVizType('column');
 
 
 oVizFrame.setVizProperties({
 
    plotArea: {
-  	colorPalette : d3.scale.category20().range,
+//  	colorPalette : d3.scale.category20().range,
    dataLabel: {
 				   visible: "true"
 			   }
