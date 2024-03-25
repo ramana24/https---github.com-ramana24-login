@@ -1,0 +1,61 @@
+<mvc:View controllerName="ux.login.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						<Panel expandable="true" expanded="true" headerText="Login Page" width="auto"
+							class="sapUiResponsiveMargin">
+							<content>
+								<VBox width="100%" class="sapUiResponsiveMargin ">
+
+
+									<VBox class="sapUiLargeMarginBeginEnd sapUiLargeMarginTop">
+										<HBox>
+
+
+											<Label class="sapUiSmallMarginTop" text="Username"
+												tooltip="Use your e-mail id " required="true"></Label>
+
+											<Input class="sapUiMediumMarginBegin" id="mail" type="Email" width="10rem"
+												value="" submit="onEmailSelect"></Input>
+										</HBox>
+									</VBox>
+
+
+									<VBox class="sapUiLargeMarginBeginEnd">
+										<HBox>
+
+
+											<Label class="sapUiSmallMarginTop" text="Password"
+												tooltip="Enter your password " required="true"></Label>
+
+											<Input class="sapUiMediumMarginBegin" id="idpwd" type="Password"
+												width="10rem" value="" submit="onEmailSelect"></Input>
+										</HBox>
+										<VBox class="sapUiLargeMarginTopBottom">
+
+											<HBox class="sapUiLargeMarginBegin">
+												<Button text="Login" type="Emphasized" press="onLogin"></Button>
+
+												<Button class="sapUiTinyMarginBegin" text="SignUp" type="Accept"
+													press="onSignUp"></Button>
+
+											</HBox>
+
+										</VBox>
+									</VBox>
+
+
+
+								</VBox>
+
+							</content>
+						</Panel>
+
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

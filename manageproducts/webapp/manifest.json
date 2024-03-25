@@ -80,7 +80,7 @@
             "css": []
         },
         "dependencies": {
-            "minUI5Version": "1.65.0",
+            "minUI5Version": "1.122.0",
             "libs": {
                 "sap.ui.core": {
                     "lazy": false
@@ -172,25 +172,6 @@
                         "filterSettings": {
                             "dateSettings": {
                                 "useDateRange": true
-                            }
-                        }
-                    }
-                },
-                "pages": {
-                    "ObjectPage|Products": {
-                        "entitySet": "Products",
-                        "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
-                        "component": {
-                            "name": "sap.suite.ui.generic.template.ObjectPage"
-                        },
-                        "pages": {
-                            "ObjectPage|Supplier": {
-                                "navigationProperty": "Supplier",
-                                "entitySet": "Suppliers",
-                                "defaultLayoutTypeIfExternalNavigation": "MidColumnFullScreen",
-                                "component": {
-                                    "name": "sap.suite.ui.generic.template.ObjectPage"
-                                }
                             }
                         }
                     }
