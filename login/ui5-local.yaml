@@ -5,7 +5,7 @@ type: application
 framework:
   name: SAPUI5
   version: '1.91.1'
-  libraries: 
+  libraries:
     - name: sap.f
     - name: sap.m
     - name: sap.suite.ui.generic.template
@@ -17,15 +17,18 @@ framework:
     - name: themelib_sap_fiori_3
 server:
   customMiddleware:
-  - name: fiori-tools-proxy
-    afterMiddleware: compression
-    configuration:
-      ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
-      backend:
-      - path: /sap/opu/odata
-        url: http://localhost
-  - name: fiori-tools-appreload
-    afterMiddleware: compression
-    configuration:
-     port: 35729
-     path: webapp
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: true # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        backend:
+          - path: /sap/opu/odata
+            url: https://localhost
+          - path: /sap
+            url: https://aurora.sapvistahub.com:44300
+            client: '100'
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp

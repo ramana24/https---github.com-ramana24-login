@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/ServiceNames(Namespace='IWBEP',Name='TEA_TEST_APPLICATION',Version='0001')/Annotations(TechnicalName='%2FIWBEP%2FTEA_TEST_ANNOTATION_FILE',Version='0001')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"/>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CORE',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="Core"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="com.sap.TEA.TestApplication" xml:lang="en" sap:schema-version="2" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="2.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="Team" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Team_Identifier"/>
+                </Key>
+                <Property Name="Team_Identifier" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Character Field with Length 10" sap:heading="Prod. Cat."/>
+                <Property Name="Name" Type="Edm.String" MaxLength="40" sap:label="Char"/>
+                <Property Name="Member_Count" Type="Edm.Int32" sap:label="INT4"/>
+                <Property Name="AlternativeName" Type="Edm.String" MaxLength="18" sap:label="Test"/>
+                <NavigationProperty Name="Technical_Info" Relationship="com.sap.TEA.TestApplication.Team_2_Type_1" FromRole="FromRole_Team_2_Type_1" ToRole="ToRole_Team_2_Type_1"/>
+                <NavigationProperty Name="Employee_Update" Relationship="com.sap.TEA.TestApplication.Team_2_Employee_Deltalink_12345678901234" FromRole="FromRole_Team_2_Employee_Deltalink_12345678901234" ToRole="ToRole_Team_2_Employee_Deltalink_12345678901234"/>
+                <NavigationProperty Name="Team_Members" Relationship="com.sap.TEA.TestApplication.Team_2_Employees" FromRole="FromRole_Team_2_Employees" ToRole="ToRole_Team_2_Employees"/>
+            </EntityType>
+            <EntityType Name="Worker" sap:semantics="aggregate" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Location" Type="com.sap.TEA.TestApplication.CT_Location" Nullable="false"/>
+                <Property Name="SecondLocation" Type="com.sap.TEA.TestApplication.CT_Location" Nullable="false"/>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="16" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Field of length 16" sap:updatable="false"/>
+                <Property Name="Gender" Type="Edm.String" MaxLength="1" sap:label="Single-Character Flag"/>
+                <Property Name="Age" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="Age_02" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="EntryDate" Type="Edm.DateTime" Precision="0" ConcurrencyMode="Fixed" sap:label="Date"/>
+                <Property Name="Manager_ID" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="Room_ID" Type="Edm.String" MaxLength="10" sap:label="Character Field with Length 10"/>
+                <Property Name="Team_ID" Type="Edm.String" MaxLength="10" sap:label="Character Field with Length 10"/>
+                <Property Name="oSQL_Where_Cl" Type="Edm.String" sap:label="Open SQL Where Clause - Mirrored from the client request"/>
+                <NavigationProperty Name="My_Team" Relationship="com.sap.TEA.TestApplication.Team_of_Employee" FromRole="FromRole_Team_of_Employee" ToRole="ToRole_Team_of_Employee"/>
+                <NavigationProperty Name="My_Expanders" Relationship="com.sap.TEA.TestApplication.Employee_2_Auto_Expand" FromRole="FromRole_Employee_2_Auto_Expand" ToRole="ToRole_Employee_2_Auto_Expand"/>
+                <NavigationProperty Name="MyPersonalData" Relationship="com.sap.TEA.TestApplication.OwnSensitiveData" FromRole="FromRole_OwnSensitiveData" ToRole="ToRole_OwnSensitiveData"/>
+                <NavigationProperty Name="MyEquipment" Relationship="com.sap.TEA.TestApplication.Employee_2_Equipment" FromRole="FromRole_Employee_2_Equipment" ToRole="ToRole_Employee_2_Equipment" sap:containstarget="true"/>
+            </EntityType>
+            <EntityType Name="Worker_Deltalink" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Location" Type="com.sap.TEA.TestApplication.CT_Location" Nullable="false"/>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="16" sap:label="Field of length 16"/>
+                <Property Name="Age" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="EntryDate" Type="Edm.DateTime" Precision="0" sap:label="Date"/>
+                <Property Name="Manager_ID" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="Room_ID" Type="Edm.String" MaxLength="10" sap:label="Character Field with Length 10"/>
+                <Property Name="Team_ID" Type="Edm.String" MaxLength="10" sap:label="Character Field with Length 10"/>
+            </EntityType>
+            <EntityType Name="MassDataEntity" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Identifier"/>
+                </Key>
+                <Property Name="P9_COMPLEX" Type="com.sap.TEA.TestApplication.CT_City" Nullable="false"/>
+                <Property Name="Identifier" Type="Edm.Int32" Nullable="false" sap:label="ID"/>
+                <Property Name="P1" Type="Edm.String" MaxLength="60" sap:label="Property 1"/>
+                <Property Name="P2" Type="Edm.String" MaxLength="60" sap:label="Property 2"/>
+                <Property Name="P3" Type="Edm.String" MaxLength="60" sap:label="Property 3"/>
+                <Property Name="P4" Type="Edm.String" MaxLength="60" sap:label="Property 4"/>
+                <Property Name="P5" Type="Edm.String" MaxLength="60" sap:label="Property 5"/>
+                <Property Name="P6" Type="Edm.String" MaxLength="60" sap:label="Property 6"/>
+                <Property Name="P7" Type="Edm.String" MaxLength="60" sap:label="Property 7"/>
+                <Property Name="P8" Type="Edm.String" MaxLength="60" sap:label="Property 8"/>
+                <NavigationProperty Name="Workers_Load" Relationship="com.sap.TEA.TestApplication.MassData_2_Employee" FromRole="FromRole_MassData_2_Employee" ToRole="ToRole_MassData_2_Employee"/>
+                <NavigationProperty Name="MassConversion" Relationship="com.sap.TEA.TestApplication.MassData_2_Conversion" FromRole="FromRole_MassData_2_Conversion" ToRole="ToRole_MassData_2_Conversion"/>
+            </EntityType>
+            <EntityType Name="TypeOneEntity" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Identifier"/>
+                    <PropertyRef Name="Time_Stamp"/>
+                </Key>
+                <Property Name="Identifier" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Field of length 16"/>
+                <Property Name="Time_Stamp" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="Counter" Type="Edm.Int32" sap:label="INT4"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40" sap:label="Char"/>
+                <Property Name="Amount" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="Currency" sap:label="Amount field"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Paymnt currency" sap:semantics="currency-code"/>
+                <Property Name="Amount_2" Type="Edm.Decimal" Precision="17" Scale="3" sap:text="Description" sap:label="dec16_3"/>
+                <Property Name="Boolean" Type="Edm.Boolean" sap:label="TRUE"/>
+                <Property Name="Date_Only" Type="Edm.DateTime" Precision="0" sap:label="Date"/>
+                <Property Name="Time_Only" Type="Edm.Time" Precision="0" sap:label="Field of type TIMS"/>
+                <Property Name="GlobalUID" Type="Edm.Guid" sap:label="GUID"/>
+                <Property Name="GUID2" Type="Edm.Guid" ConcurrencyMode="Fixed" sap:label="GUID"/>
+                <Property Name="VeryLongPropertyNameForOrderBy" Type="Edm.String" sap:label="Property with long name in order to test $orderby statement"/>
+            </EntityType>
+            <EntityType Name="ErrorCase" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Identifier"/>
+                </Key>
+                <Property Name="Identifier" Type="Edm.String" Nullable="false" sap:label="Error Case ID"/>
+                <Property Name="Description" Type="Edm.String" sap:label="Error Case Description"/>
+            </EntityType>
+            <EntityType Name="Equipment" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Employee_ID"/>
+                    <PropertyRef Name="Equipment_ID"/>
+                </Key>
+                <Property Name="Employee_ID" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="Equipment_ID" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Equipment ID"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="20" sap:label="Equipment Name"/>
+                <Property Name="Description" Type="Edm.String" sap:label="Description"/>
+                <Property Name="EmployeeDate" Type="Edm.DateTime" Precision="0" ConcurrencyMode="Fixed" sap:label="Date"/>
+                <Property Name="Previous_Employee_ID" Type="Edm.String" MaxLength="4" sap:label="Identifier"/>
+            </EntityType>
+            <EntityType Name="Annotation_Documentation_Entity" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Identifier"/>
+                    <PropertyRef Name="Time_Stamp"/>
+                </Key>
+                <Property Name="Identifier" Type="Edm.String" Nullable="false" MaxLength="16" sap:label="Field of length 16"/>
+                <Property Name="Time_Stamp" Type="Edm.DateTime" Nullable="false" Precision="0" sap:lower-boundary="Renamed_Start_Time" sap:upper-boundary="Renamed_End_Time" sap:label="Time Stamp"/>
+                <Property Name="Counter" Type="Edm.Int32" sap:label="INT4"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40" sap:label="Char"/>
+                <Property Name="Amount" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="Currency" sap:label="Amount field"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:precision="Counter" sap:label="Paymnt currency" sap:semantics="currency-code"/>
+                <Property Name="Amount_2" Type="Edm.Decimal" Precision="17" Scale="3" sap:text="Description" sap:unit="Currency" sap:label="dec16_3"/>
+                <Property Name="Boolean" Type="Edm.Boolean" sap:label="TRUE"/>
+                <Property Name="Date_Only" Type="Edm.DateTime" Precision="0" sap:field-control="Time_Stamp" sap:text="Time_Stamp" sap:label="Date"/>
+                <Property Name="Time_Only" Type="Edm.Time" Precision="0" sap:label="Field of type TIMS"/>
+                <Property Name="GlobalUID" Type="Edm.Guid" sap:label="GUID"/>
+                <Property Name="VeryLongPropertyNameForOrderBy" Type="Edm.String" sap:label="Property with long name in order to test $orderby statement"/>
+                <Property Name="Renamed_Start_Time" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="Renamed_End_Time" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+            </EntityType>
+            <EntityType Name="EdmTypes" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="DateTime"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="Boolean" Type="Edm.Boolean" sap:label="TRUE"/>
+                <Property Name="DateTime" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Date"/>
+                <Property Name="TimeStampShort" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="TimeStampLong" Type="Edm.DateTime" Precision="7" ConcurrencyMode="Fixed" sap:label="Time Stamp"/>
+                <Property Name="Time" Type="Edm.Time" Precision="0" sap:label="Field of type TIMS"/>
+                <Property Name="String" Type="Edm.String"/>
+                <Property Name="Char" Type="Edm.String" MaxLength="40" sap:label="Char"/>
+                <Property Name="Numc" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Int16" Type="Edm.Int16" sap:label="INT2"/>
+                <Property Name="Int32" Type="Edm.Int32" sap:label="INT4"/>
+                <Property Name="Int64" Type="Edm.Int64"/>
+                <Property Name="Decimal" Type="Edm.Decimal" Precision="31" Scale="14"/>
+                <Property Name="Single" Type="Edm.Single" sap:label="Field of type FLTP"/>
+                <Property Name="Double" Type="Edm.Double" ConcurrencyMode="Fixed" sap:label="Field of type FLTP"/>
+                <Property Name="Float" Type="Edm.Float" sap:label="Field of type FLTP"/>
+                <Property Name="GlobalUID" Type="Edm.Guid" sap:label="GUID"/>
+                <Property Name="Numc_As_EDM_Dec" Type="Edm.Decimal" Precision="20" Scale="0" sap:label="NUMC as Edm.Decimal"/>
+            </EntityType>
+            <EntityType Name="Decimal" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="DecimalComplex" Type="com.sap.TEA.TestApplication.CT_Decimal" Nullable="false"/>
+                <Property Name="Id" Type="Edm.Int16" Nullable="false" sap:label="Key property Edm.Int16"/>
+                <Property Name="Name" Type="Edm.String" sap:label="Non-decimal field"/>
+                <Property Name="Decimal1" Type="Edm.Decimal" Precision="20" Scale="10" sap:label="Decimal field"/>
+            </EntityType>
+            <EntityType Name="Manager" BaseType="com.sap.TEA.TestApplication.Worker" sap:content-version="1">
+                <Property Name="HeadCount" Type="Edm.Int32" sap:label="INT4"/>
+                <Property Name="HeadCount_2" Type="Edm.Int32"/>
+                <Property Name="AlternativeName" Type="Edm.String" MaxLength="18" sap:label="Test"/>
+                <NavigationProperty Name="Manager_2_Team" Relationship="com.sap.TEA.TestApplication.Manager_2_Team" FromRole="FromRole_Manager_2_Team" ToRole="ToRole_Manager_2_Team" sap:containstarget="true"/>
+            </EntityType>
+            <EntityType Name="ManagerNonDDIC" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Location" Type="com.sap.TEA.TestApplication.CT_Location" Nullable="false"/>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="16" sap:label="Field of length 16"/>
+                <Property Name="Age" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="Gender" Type="Edm.String" MaxLength="1" sap:label="Single-Character Flag"/>
+                <Property Name="EntryDate" Type="Edm.DateTime" Precision="0" sap:label="Date"/>
+                <Property Name="Manager_ID" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="Room_ID" Type="Edm.String" MaxLength="10" sap:label="Character Field with Length 10"/>
+                <Property Name="Team_ID" Type="Edm.String" MaxLength="10" sap:label="Character Field with Length 10"/>
+                <Property Name="HeadCount" Type="Edm.Int32" sap:label="INT4"/>
+                <Property Name="EmptyProperty" Type="Edm.String" MaxLength="10" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Character Field with Length 10" sap:updatable="false"/>
+                <Property Name="HeadCount_2" Type="Edm.Int32"/>
+                <NavigationProperty Name="My_Team_ND" Relationship="com.sap.TEA.TestApplication.Team_of_ManagerNonDDIC" FromRole="FromRole_Team_of_ManagerNonDDIC" ToRole="ToRole_Team_of_ManagerNonDDIC"/>
+            </EntityType>
+            <EntityType Name="SensitiveData" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EmployeeID"/>
+                </Key>
+                <Property Name="HomeAddress" Type="com.sap.TEA.TestApplication.CT_Location" Nullable="false"/>
+                <Property Name="EmployeeID" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="PerformanceRating" Type="Edm.String" MaxLength="60" sap:label="Description"/>
+            </EntityType>
+            <EntityType Name="Conversion" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="AmountCT" Type="com.sap.TEA.TestApplication.CT_Salary" Nullable="false"/>
+                <Property Name="Deep_Conversion" Type="com.sap.TEA.TestApplication.CT_Deep_Conversion" Nullable="false"/>
+                <Property Name="Deep_Conversion_2" Type="com.sap.TEA.TestApplication.CT_Deep_Conversion_2" Nullable="false"/>
+                <Property Name="CT_Conversion" Type="com.sap.TEA.TestApplication.CT_Conversion" Nullable="false"/>
+                <Property Name="No_Binding" Type="com.sap.TEA.TestApplication.CT_No_Binding" Nullable="false"/>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="price_1" Type="Edm.Decimal" Precision="15" Scale="14" sap:unit="currency_1" sap:label="Airfare"/>
+                <Property Name="currency_1" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:semantics="currency-code"/>
+                <Property Name="price_2" Type="Edm.Decimal" Precision="15" Scale="14" sap:unit="currency_2" sap:label="Price with 3 decimal places"/>
+                <Property Name="currency_2" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:semantics="currency-code"/>
+                <Property Name="amount_1" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="unit_1" sap:label="Luggage Weight"/>
+                <Property Name="unit_1" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:semantics="unit-of-measure"/>
+                <Property Name="amount_2" Type="Edm.Decimal" Precision="15" Scale="14" sap:unit="unit_2" sap:label="Amount with 3 decimal places"/>
+                <Property Name="unit_2" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:semantics="unit-of-measure"/>
+                <Property Name="oSQL_Where_Cl" Type="Edm.String" sap:label="Open SQL Where Clause - Mirrored from the client request"/>
+                <Property Name="Is_Boolean" Type="Edm.Boolean" sap:label="TRUE"/>
+                <Property Name="TZNTSTMPL" Type="Edm.DateTime" DefaultValue="2016-08-23T12:36:01.5629680" Precision="7" sap:label="Time Stamp"/>
+                <Property Name="TZNTSTMPLL" Type="Edm.String" MaxLength="27" sap:label="Local TS"/>
+                <Property Name="TZNTSTMPS" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+                <Property Name="TZNTIMELOC" Type="Edm.String" MaxLength="6" sap:label="Local Time"/>
+                <Property Name="TIMESTAMP_CHAR" Type="Edm.DateTime" Precision="0"/>
+                <Property Name="DATUM" Type="Edm.DateTime" DefaultValue="2016-08-04T00:00:00" Precision="0" sap:label="Date"/>
+                <Property Name="STARTDATE" Type="Edm.String" MaxLength="10" sap:label="Date"/>
+                <Property Name="UZEIT" Type="Edm.Time" Precision="0" sap:label="Time"/>
+                <Property Name="STARTTIME" Type="Edm.String" MaxLength="8" sap:label="Time"/>
+                <Property Name="SYSUUID_C22" Type="Edm.String" MaxLength="22" sap:label="UUID 22 char."/>
+                <Property Name="SYSUUID_22" Type="Edm.String" MaxLength="22" sap:is-uuid="true" sap:label="UUID 22 char."/>
+                <Property Name="GUID_32" Type="Edm.String" MaxLength="32" sap:label="UUID with length 32"/>
+                <Property Name="GUID_C32" Type="Edm.String" MaxLength="32" sap:label="UUID"/>
+                <Property Name="CHAR4" Type="Edm.Decimal" DefaultValue="47" Precision="4" Scale="0" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="NUMC4" Type="Edm.Decimal" Precision="4" Scale="0" sap:label="Counter"/>
+                <Property Name="CHAR10" Type="Edm.String" MaxLength="10" sap:label="Char with length 10"/>
+                <Property Name="STRING10" Type="Edm.String" MaxLength="10" sap:label="String with edm max length 10"/>
+                <Property Name="NUMC10" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="NUMC with length 10"/>
+                <Property Name="NUMC4_without_data_provided" Type="Edm.String"/>
+                <Property Name="NUMC4_ALPHA" Type="Edm.String" MaxLength="4" sap:label="NUMC with length 4 and ALPHA conversion"/>
+                <Property Name="NUMC10_NO_ALPHA" Type="Edm.String" MaxLength="10" sap:label="NUMC with len 10 and ALPHA conversion but conv deactivated"/>
+                <Property Name="CHAR4_UC" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="UNIT_EXIT_CUNIT" Type="Edm.String" MaxLength="3" sap:label="Unit Code with conversion exit CUNIT (set in mpc)" sap:semantics="unit-of-measure"/>
+                <Property Name="NUMC_S4HANA" Type="Edm.String" MaxLength="8" sap:label="NUMC like in S4HANA"/>
+                <Property Name="SSTRING10" Type="Edm.String" MaxLength="10" sap:label="Sstring with length 10"/>
+                <Property Name="INT64" Type="Edm.Int64"/>
+                <Property Name="LANGUAGE" Type="Edm.String" MaxLength="2" sap:label="Language"/>
+                <Property Name="DEC_WITH_FLOAT" Type="Edm.Decimal" Precision="22" Scale="0" sap:label="EDM.Decimal based on float"/>
+                <Property Name="NUMC_8_NO_CONV" Type="Edm.String" MaxLength="24" sap:label="NUMC length 8"/>
+                <Property Name="price_3" Type="Edm.Decimal" Precision="15" Scale="4" sap:unit="currency_3"/>
+                <Property Name="currency_3" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:semantics="currency-code"/>
+                <Property Name="amount_3" Type="Edm.Decimal" Precision="15" Scale="4" sap:unit="unit_3"/>
+                <Property Name="unit_3" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:semantics="unit-of-measure"/>
+                <NavigationProperty Name="TO_TEAM" Relationship="com.sap.TEA.TestApplication.TO_TEAM" FromRole="FromRole_TO_TEAM" ToRole="ToRole_TO_TEAM"/>
+            </EntityType>
+            <EntityType Name="Employee_Plus" sap:semantics="aggregate" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Location" Type="com.sap.TEA.TestApplication.CT_Location" Nullable="false"/>
+                <Property Name="UserProfile" Type="com.sap.TEA.TestApplication.CT_UserProfile" Nullable="false"/>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="16" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Field of length 16" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Age" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="Age_02" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="EntryDate" Type="Edm.DateTime" Precision="0" ConcurrencyMode="Fixed" sap:label="Date"/>
+                <Property Name="Manager_ID" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="Room_ID" Type="Edm.String" MaxLength="10" sap:label="Character Field with Length 10"/>
+                <Property Name="Team_ID" Type="Edm.String" MaxLength="10" sap:label="Character Field with Length 10"/>
+                <Property Name="HeadCount" Type="Edm.Int32" sap:label="INT4"/>
+            </EntityType>
+            <EntityType Name="Auto_Expand" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TestId"/>
+                </Key>
+                <Property Name="TestId" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="price_1" Type="Edm.Decimal" Precision="15" Scale="14" sap:unit="currency_1" sap:label="Airfare"/>
+                <Property Name="currency_1" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:semantics="currency-code"/>
+                <Property Name="amount_1" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="unit_1" sap:label="Luggage Weight"/>
+                <Property Name="unit_1" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:semantics="unit-of-measure"/>
+                <Property Name="PRICE_2" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="CURRENCY_2" sap:label="Price with 3 decimal places" sap:is-extension-field="true"/>
+                <Property Name="CURRENCY_2" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:is-extension-field="true" sap:semantics="currency-code"/>
+                <Property Name="AMOUNT_2" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="UNIT_2" sap:label="Amount with 3 decimal places" sap:is-extension-field="true"/>
+                <Property Name="UNIT_2" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:is-extension-field="true" sap:semantics="unit-of-measure"/>
+                <Property Name="AE1_PRICE_3" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="currency_1" sap:label="Price with 2 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE1_CURRENCY_3" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:is-extension-field="true" sap:semantics="currency-code"/>
+                <Property Name="AE1_AMOUNT_3" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="unit_1" sap:label="Amount with 3 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE1_UNIT_3" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:is-extension-field="true" sap:semantics="unit-of-measure"/>
+                <Property Name="AE1_PRICE_4" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="currency_1" sap:label="Price with 2 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE1_AMOUNT_4" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="unit_1" sap:label="Amount with 3 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE1_STRING_TEXT" Type="Edm.String" sap:label="Text" sap:is-extension-field="true"/>
+                <Property Name="ID11" Type="Edm.String" MaxLength="4" sap:label="Identifier" sap:is-extension-field="true"/>
+                <Property Name="AMOUNT11" Type="Edm.Decimal" Precision="10" Scale="3" sap:unit="CURRENCY11" sap:label="Salary Amount" sap:is-extension-field="true"/>
+                <Property Name="CURRENCY11" Type="Edm.String" MaxLength="5" sap:label="Paymnt currency" sap:is-extension-field="true" sap:semantics="currency-code"/>
+                <Property Name="PAYOUT_DATE11" Type="Edm.DateTime" Precision="0" sap:label="Payout date" sap:is-extension-field="true"/>
+                <Property Name="AGE12" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)" sap:is-extension-field="true"/>
+                <Property Name="GENDER12" Type="Edm.String" MaxLength="1" sap:label="Single-Character Flag" sap:is-extension-field="true"/>
+                <Property Name="AE2_PRICE_1" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="currency_1" sap:label="Price with 2 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE2_UNIT_1" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="unit_1" sap:label="Amount with 3 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE2_PRICE_2" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="CURRENCY_2" sap:label="Price with 2 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE2_UNIT_2" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="UNIT_2" sap:label="Amount with 3 decimal places" sap:is-extension-field="true"/>
+            </EntityType>
+            <EntityType Name="Auto_Expand_2" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TestId"/>
+                </Key>
+                <Property Name="TestId" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="price_1" Type="Edm.Decimal" Precision="15" Scale="14" sap:unit="currency_1" sap:label="Airfare"/>
+                <Property Name="currency_1" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:semantics="currency-code"/>
+                <Property Name="amount_1" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="unit_1" sap:label="Luggage Weight"/>
+                <Property Name="unit_1" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:semantics="unit-of-measure"/>
+                <Property Name="PRICE_2" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="CURRENCY_2" sap:label="Price with 3 decimal places" sap:is-extension-field="true"/>
+                <Property Name="CURRENCY_2" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:is-extension-field="true" sap:semantics="currency-code"/>
+                <Property Name="AMOUNT_2" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="UNIT_2" sap:label="Amount with 3 decimal places" sap:is-extension-field="true"/>
+                <Property Name="UNIT_2" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:is-extension-field="true" sap:semantics="unit-of-measure"/>
+                <Property Name="AE1_PRICE_3" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="AE1_CURRENCY_3" sap:label="Price with 2 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE1_CURRENCY_3" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:is-extension-field="true" sap:semantics="currency-code"/>
+                <Property Name="AE1_AMOUNT_3" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="AE1_UNIT_3" sap:label="Amount with 3 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE1_UNIT_3" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:is-extension-field="true" sap:semantics="unit-of-measure"/>
+                <Property Name="AE1_PRICE_4" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="currency_1" sap:label="Price with 2 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE1_AMOUNT_4" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="unit_1" sap:label="Amount with 3 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE1_STRING_TEXT" Type="Edm.String" sap:label="Text" sap:is-extension-field="true"/>
+                <Property Name="ID11" Type="Edm.String" MaxLength="4" sap:label="Identifier" sap:is-extension-field="true"/>
+                <Property Name="AMOUNT11" Type="Edm.Decimal" Precision="10" Scale="3" sap:unit="CURRENCY11" sap:label="Salary Amount" sap:is-extension-field="true"/>
+                <Property Name="CURRENCY11" Type="Edm.String" MaxLength="5" sap:label="Paymnt currency" sap:is-extension-field="true" sap:semantics="currency-code"/>
+                <Property Name="PAYOUT_DATE11" Type="Edm.DateTime" Precision="0" sap:label="Payout date" sap:is-extension-field="true"/>
+                <Property Name="AGE12" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)" sap:is-extension-field="true"/>
+                <Property Name="GENDER12" Type="Edm.String" MaxLength="1" sap:label="Single-Character Flag" sap:is-extension-field="true"/>
+                <Property Name="AE2_PRICE_1" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="currency_1" sap:label="Price with 2 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE2_UNIT_1" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="unit_1" sap:label="Amount with 3 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE2_PRICE_2" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="CURRENCY_2" sap:label="Price with 2 decimal places" sap:is-extension-field="true"/>
+                <Property Name="AE2_UNIT_2" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="UNIT_2" sap:label="Amount with 3 decimal places" sap:is-extension-field="true"/>
+            </EntityType>
+            <EntityType Name="DI_TEST_LEK_SURVEY" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="WIZARD_NAME"/>
+                </Key>
+                <Property Name="WIZARD_NAME" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="TRIGGER_OBJECT_TYPE" Type="Edm.String" MaxLength="40"/>
+                <Property Name="TRIGGER_OBJECT" Type="Edm.String" MaxLength="40"/>
+                <NavigationProperty Name="DI_TEST_SURVEY_CW" Relationship="com.sap.TEA.TestApplication.A1616" FromRole="FromRole_A1616" ToRole="ToRole_A1616"/>
+            </EntityType>
+            <EntityType Name="DI_TEST_SURVEY_CW" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="DUMMY"/>
+                </Key>
+                <Property Name="DUMMY" Type="Edm.String" Nullable="false" MaxLength="1"/>
+                <NavigationProperty Name="DI_TEST_SURVEY_DATA" Relationship="com.sap.TEA.TestApplication.A1615" FromRole="FromRole_A1615" ToRole="ToRole_A1615"/>
+            </EntityType>
+            <EntityType Name="DI_TEST_SURVEY_DATA" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="NAME"/>
+                </Key>
+                <Property Name="NAME" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <NavigationProperty Name="DI_TEST_CHANGED_FIELD" Relationship="com.sap.TEA.TestApplication.A725" FromRole="FromRole_A725" ToRole="ToRole_A725"/>
+                <NavigationProperty Name="DI_TEST_VALUE_DESCRIPTION" Relationship="com.sap.TEA.TestApplication.A756" FromRole="FromRole_A756" ToRole="ToRole_A756"/>
+            </EntityType>
+            <EntityType Name="DI_TEST_CHANGED_FIELD" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="NAME"/>
+                </Key>
+                <Property Name="NAME" Type="Edm.String" Nullable="false" MaxLength="40"/>
+            </EntityType>
+            <EntityType Name="DI_TEST_VALUE_DESCRIPTION" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="VALUE"/>
+                </Key>
+                <Property Name="VALUE" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="40"/>
+            </EntityType>
+            <EntityType Name="ST_Test" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="MY_DATE"/>
+                    <PropertyRef Name="MY_STRING"/>
+                    <PropertyRef Name="MY_STRING_XSTRING"/>
+                    <PropertyRef Name="MY_STRING_FLOAT"/>
+                    <PropertyRef Name="MY_DECIMAL"/>
+                </Key>
+                <Property Name="MY_DATE" Type="Edm.DateTimeOffset" Nullable="false" Precision="0"/>
+                <Property Name="MY_STRING" Type="Edm.String" Nullable="false"/>
+                <Property Name="MY_STRING_XSTRING" Type="Edm.String" Nullable="false"/>
+                <Property Name="MY_STRING_FLOAT" Type="Edm.String" Nullable="false"/>
+                <Property Name="MY_DECIMAL" Type="Edm.Decimal" Nullable="false" Precision="0" Scale="7"/>
+                <Property Name="STARTDATE" Type="Edm.String" ConcurrencyMode="Fixed"/>
+                <Property Name="AMOUNT" Type="Edm.Decimal" Precision="0" Scale="2" sap:unit="CURRENCY"/>
+                <Property Name="CURRENCY" Type="Edm.String" MaxLength="3" sap:semantics="currency-code"/>
+                <Property Name="BOOLEAN_CONV" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="ST_1" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="P_ID"/>
+                </Key>
+                <Property Name="P_ID" Type="Edm.String" Nullable="false"/>
+            </EntityType>
+            <EntityType Name="SoftState" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="4"/>
+                <Property Name="Text" Type="Edm.String" MaxLength="128"/>
+            </EntityType>
+            <EntityType Name="Draft" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="price" Type="Edm.Decimal" Precision="15" Scale="14" sap:unit="currency" sap:label="Airfare"/>
+                <Property Name="currency" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:semantics="currency-code"/>
+                <Property Name="amount" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="unit" sap:label="Luggage Weight"/>
+                <Property Name="unit" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:semantics="unit-of-measure"/>
+                <Property Name="test_currency" Type="Edm.String" MaxLength="5" sap:label="Airline Currency" sap:semantics="currency-code"/>
+                <Property Name="test_unit" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:semantics="unit-of-measure"/>
+                <Property Name="test_id" Type="Edm.String" MaxLength="4" sap:label="Identifier"/>
+            </EntityType>
+            <EntityType Name="Price" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Price" Type="Edm.Int32"/>
+                <Property Name="Currency" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="VL_ID" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" sap:value-list="standard"/>
+                <Property Name="NAME" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="VL_VL_ID" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false"/>
+                <Property Name="NAME" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="VL_COUNTRY_DEEP" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CountryID"/>
+                </Key>
+                <Property Name="CountryID" Type="Edm.String" Nullable="false"/>
+                <Property Name="Country" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="VL_FLIGHT_DETAILS_AIRPORT_TO" sap:value-list="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="AirportID"/>
+                </Key>
+                <Property Name="AirportID" Type="Edm.String" Nullable="false"/>
+                <Property Name="AirportName" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="EmployeePicture" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="mimeType" Type="Edm.String" MaxLength="128" sap:label="MIME Type"/>
+            </EntityType>
+            <EntityType Name="UnitOfMeasure" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UnitOfMeasure"/>
+                </Key>
+                <Property Name="UnitOfMeasure" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Internal UoM" sap:semantics="unit-of-measure"/>
+                <Property Name="DB_Value" Type="Edm.String" MaxLength="3" sap:label="3-Byte field"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="10" sap:label="Meas. unit text"/>
+                <NavigationProperty Name="ToUnitOfMeasure" Relationship="com.sap.TEA.TestApplication.UnitOfMeasure_2_UnitOfMeasure" FromRole="FromRole_UnitOfMeasure_2_UnitOfMeasure" ToRole="ToRole_UnitOfMeasure_2_UnitOfMeasure"/>
+            </EntityType>
+            <EntityType Name="ET_EXCONV" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="UNIT"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="UNIT" Type="Edm.String" Nullable="false"/>
+                <NavigationProperty Name="TO_ME" Relationship="com.sap.TEA.TestApplication.AS_EXCONV" FromRole="FromRole_AS_EXCONV" ToRole="ToRole_AS_EXCONV" sap:containstarget="true"/>
+            </EntityType>
+            <EntityType Name="NullableProperties" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="STRING_WITH_VALUE_CONTROL" Type="Edm.String"/>
+                <Property Name="DATE_WITH_VALUE_CONTROL" Type="Edm.DateTime" Precision="7" sap:label="Time Stamp"/>
+            </EntityType>
+            <ComplexType Name="CT_City">
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="16" sap:label="Field of length 16"/>
+                <Property Name="CityName" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Char255"/>
+                <Property Name="VeryLongPropertyNameForOrderBy" Type="Edm.String" MaxLength="16" sap:label="Field of length 16"/>
+            </ComplexType>
+            <ComplexType Name="CT_Location">
+                <Property Name="Country" Type="Edm.String" MaxLength="255" sap:text="Country" sap:label="Char255"/>
+                <Property Name="Region" Type="Edm.String" MaxLength="3" sap:text="Region" sap:label="Region"/>
+                <Property Name="City" Type="com.sap.TEA.TestApplication.CT_City" Nullable="false"/>
+                <Property Name="Complex_type_City" Type="com.sap.TEA.TestApplication.CT_City" Nullable="false"/>
+            </ComplexType>
+            <ComplexType Name="CT_Salary">
+                <Property Name="Amount" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="Currency" sap:label="Salary Amount"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Paymnt currency" sap:semantics="currency-code"/>
+                <Property Name="ChangedOn" Type="Edm.DateTime" Precision="0" sap:label="Time Stamp"/>
+            </ComplexType>
+            <ComplexType Name="CT_Deep_Conversion">
+                <Property Name="Amount" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="Currency" sap:label="Salary Amount"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Paymnt currency" sap:semantics="currency-code"/>
+                <Property Name="UNIT_EXIT_CUNIT" Type="Edm.String" MaxLength="3" sap:label="Unit Code with conversion exit CUNIT (set in mpc)" sap:semantics="unit-of-measure"/>
+            </ComplexType>
+            <ComplexType Name="CT_Deep_Conversion_2">
+                <Property Name="Amount" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="Unit" sap:label="Luggage Weight"/>
+                <Property Name="Unit" Type="Edm.String" MaxLength="3" sap:label="Unit of measure" sap:semantics="unit-of-measure"/>
+                <Property Name="CT_Conversion" Type="Edm.String" MaxLength="4" sap:label="Undefined range (can be used for patch levels)"/>
+                <Property Name="Sub_Conv" Type="com.sap.TEA.TestApplication.CT_Deep_Conversion" Nullable="false"/>
+            </ComplexType>
+            <ComplexType Name="CT_Conversion">
+                <Property Name="Amount" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="Currency" sap:label="Salary Amount"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Paymnt currency" sap:semantics="currency-code"/>
+            </ComplexType>
+            <ComplexType Name="CT_Bonus">
+                <Property Name="Id" Type="Edm.String" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="Amount" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="Currency" sap:label="Salary Amount"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Paymnt currency" sap:semantics="currency-code"/>
+                <Property Name="PayoutDate" Type="Edm.DateTime" Precision="0" sap:label="Payout date"/>
+            </ComplexType>
+            <ComplexType Name="CT_BonusDeep2">
+                <Property Name="Amount" Type="Edm.Decimal" Precision="9" Scale="9" sap:unit="Currency" sap:label="Salary Amount"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Paymnt currency" sap:semantics="currency-code"/>
+            </ComplexType>
+            <ComplexType Name="CT_BonusDeep">
+                <Property Name="Id" Type="Edm.String" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="BONUS_LEVEL_2" Type="com.sap.TEA.TestApplication.CT_BonusDeep2" Nullable="false"/>
+            </ComplexType>
+            <ComplexType Name="CT_No_Binding">
+                <Property Name="Text" Type="Edm.String"/>
+            </ComplexType>
+            <ComplexType Name="CT_BonusNC">
+                <Property Name="Id" Type="Edm.String" MaxLength="4" sap:label="Identifier"/>
+                <Property Name="Amount" Type="Edm.Decimal" Precision="9" Scale="2" sap:label="Salary Amount"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Paymnt currency" sap:semantics="currency-code"/>
+                <Property Name="PayoutDate" Type="Edm.DateTime" Precision="0" sap:label="Payout date"/>
+            </ComplexType>
+            <ComplexType Name="CT_EdmDefault">
+                <Property Name="Id" Type="Edm.String"/>
+                <Property Name="Binary" Type="Edm.Binary"/>
+                <Property Name="Boolean" Type="Edm.Boolean"/>
+                <Property Name="Byte" Type="Edm.Byte"/>
+                <Property Name="Datetime" Type="Edm.DateTime" Precision="0"/>
+                <Property Name="DatetimeOffset" Type="Edm.DateTimeOffset" Precision="0"/>
+                <Property Name="Decimal" Type="Edm.Decimal" Precision="0" Scale="0"/>
+                <Property Name="Double" Type="Edm.Double" DefaultValue="1.234E-01"/>
+                <Property Name="Float" Type="Edm.Float"/>
+                <Property Name="Guid" Type="Edm.Guid"/>
+                <Property Name="Int16" Type="Edm.Int16"/>
+                <Property Name="Int32" Type="Edm.Int32"/>
+                <Property Name="Int64" Type="Edm.Int64"/>
+                <Property Name="Sbyte" Type="Edm.SByte"/>
+                <Property Name="Single" Type="Edm.Single"/>
+                <Property Name="String" Type="Edm.String"/>
+                <Property Name="Time" Type="Edm.Time" Precision="0"/>
+            </ComplexType>
+            <ComplexType Name="CT_UserProfile">
+                <Property Name="ValidFrom" Type="Edm.DateTime" Precision="0" sap:updatable="false"/>
+                <Property Name="ValidTo" Type="Edm.DateTime" Precision="0" sap:updatable="false"/>
+                <Property Name="UserGroup" Type="Edm.String" MaxLength="12" sap:updatable="false"/>
+                <Property Name="Timezone" Type="Edm.String" MaxLength="6" sap:label="Time Zone"/>
+                <Property Name="LastLogon" Type="Edm.Time" Precision="0" sap:updatable="false"/>
+                <Property Name="DateFormat" Type="Edm.String" MaxLength="1"/>
+                <Property Name="DecimalNotation" Type="Edm.String" MaxLength="1"/>
+                <Property Name="Language" Type="Edm.String" MaxLength="2"/>
+                <Property Name="TimeFormat" Type="Edm.String" MaxLength="1"/>
+            </ComplexType>
+            <ComplexType Name="CT_Decimal">
+                <Property Name="CtDecimal1" Type="Edm.Decimal" Precision="20" Scale="10" sap:label="Decimal field"/>
+            </ComplexType>
+            <Association Name="Team_2_Type_1" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.Team" Multiplicity="1" Role="FromRole_Team_2_Type_1"/>
+                <End Type="com.sap.TEA.TestApplication.TypeOneEntity" Multiplicity="0..1" Role="ToRole_Team_2_Type_1"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Team_2_Type_1">
+                        <PropertyRef Name="Team_Identifier"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Team_2_Type_1">
+                        <PropertyRef Name="Identifier"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Team_2_Employee_Deltalink_12345678901234" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.Team" Multiplicity="1" Role="FromRole_Team_2_Employee_Deltalink_12345678901234"/>
+                <End Type="com.sap.TEA.TestApplication.Worker_Deltalink" Multiplicity="1" Role="ToRole_Team_2_Employee_Deltalink_12345678901234"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Team_2_Employee_Deltalink_12345678901234">
+                        <PropertyRef Name="Team_Identifier"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Team_2_Employee_Deltalink_12345678901234">
+                        <PropertyRef Name="Id"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Team_2_Employees" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.Team" Multiplicity="1" Role="FromRole_Team_2_Employees"/>
+                <End Type="com.sap.TEA.TestApplication.Worker" Multiplicity="*" Role="ToRole_Team_2_Employees"/>
+            </Association>
+            <Association Name="Team_of_Employee" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.Worker" Multiplicity="*" Role="FromRole_Team_of_Employee">
+                    <OnDelete Action="None"/>
+                </End>
+                <End Type="com.sap.TEA.TestApplication.Team" Multiplicity="1" Role="ToRole_Team_of_Employee">
+                    <OnDelete Action="None"/>
+                </End>
+            </Association>
+            <Association Name="Employee_2_Auto_Expand" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.Worker" Multiplicity="1" Role="FromRole_Employee_2_Auto_Expand"/>
+                <End Type="com.sap.TEA.TestApplication.Auto_Expand_2" Multiplicity="*" Role="ToRole_Employee_2_Auto_Expand"/>
+            </Association>
+            <Association Name="OwnSensitiveData" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.Worker" Multiplicity="1" Role="FromRole_OwnSensitiveData"/>
+                <End Type="com.sap.TEA.TestApplication.SensitiveData" Multiplicity="0..1" Role="ToRole_OwnSensitiveData"/>
+            </Association>
+            <Association Name="Employee_2_Equipment" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.Worker" Multiplicity="1" Role="FromRole_Employee_2_Equipment"/>
+                <End Type="com.sap.TEA.TestApplication.Equipment" Multiplicity="*" Role="ToRole_Employee_2_Equipment"/>
+            </Association>
+            <Association Name="TO_TEAM" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.Conversion" Multiplicity="1" Role="FromRole_TO_TEAM"/>
+                <End Type="com.sap.TEA.TestApplication.Team" Multiplicity="*" Role="ToRole_TO_TEAM"/>
+            </Association>
+            <Association Name="AS_EXCONV" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.ET_EXCONV" Multiplicity="1" Role="FromRole_AS_EXCONV"/>
+                <End Type="com.sap.TEA.TestApplication.ET_EXCONV" Multiplicity="1" Role="ToRole_AS_EXCONV"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_AS_EXCONV">
+                        <PropertyRef Name="UNIT"/>
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_AS_EXCONV">
+                        <PropertyRef Name="UNIT"/>
+                        <PropertyRef Name="ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Manager_2_Team" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.Manager" Multiplicity="*" Role="FromRole_Manager_2_Team"/>
+                <End Type="com.sap.TEA.TestApplication.Team" Multiplicity="1" Role="ToRole_Manager_2_Team"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Manager_2_Team">
+                        <PropertyRef Name="Team_ID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Manager_2_Team">
+                        <PropertyRef Name="Team_Identifier"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="A1616" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.DI_TEST_LEK_SURVEY" Multiplicity="1" Role="FromRole_A1616"/>
+                <End Type="com.sap.TEA.TestApplication.DI_TEST_SURVEY_CW" Multiplicity="*" Role="ToRole_A1616"/>
+            </Association>
+            <Association Name="Team_of_ManagerNonDDIC" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.ManagerNonDDIC" Multiplicity="*" Role="FromRole_Team_of_ManagerNonDDIC"/>
+                <End Type="com.sap.TEA.TestApplication.Team" Multiplicity="1" Role="ToRole_Team_of_ManagerNonDDIC"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Team_of_ManagerNonDDIC">
+                        <PropertyRef Name="Team_ID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Team_of_ManagerNonDDIC">
+                        <PropertyRef Name="Team_Identifier"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="A725" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.DI_TEST_SURVEY_DATA" Multiplicity="1" Role="FromRole_A725"/>
+                <End Type="com.sap.TEA.TestApplication.DI_TEST_CHANGED_FIELD" Multiplicity="*" Role="ToRole_A725"/>
+            </Association>
+            <Association Name="A756" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.DI_TEST_SURVEY_DATA" Multiplicity="1" Role="FromRole_A756"/>
+                <End Type="com.sap.TEA.TestApplication.DI_TEST_VALUE_DESCRIPTION" Multiplicity="*" Role="ToRole_A756"/>
+            </Association>
+            <Association Name="A1615" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.DI_TEST_SURVEY_CW" Multiplicity="1" Role="FromRole_A1615"/>
+                <End Type="com.sap.TEA.TestApplication.DI_TEST_SURVEY_DATA" Multiplicity="*" Role="ToRole_A1615"/>
+            </Association>
+            <Association Name="MassData_2_Employee" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.MassDataEntity" Multiplicity="1" Role="FromRole_MassData_2_Employee"/>
+                <End Type="com.sap.TEA.TestApplication.Worker" Multiplicity="*" Role="ToRole_MassData_2_Employee"/>
+            </Association>
+            <Association Name="MassData_2_Conversion" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.MassDataEntity" Multiplicity="1" Role="FromRole_MassData_2_Conversion"/>
+                <End Type="com.sap.TEA.TestApplication.Conversion" Multiplicity="*" Role="ToRole_MassData_2_Conversion"/>
+            </Association>
+            <Association Name="UnitOfMeasure_2_UnitOfMeasure" sap:content-version="1">
+                <End Type="com.sap.TEA.TestApplication.UnitOfMeasure" Multiplicity="1" Role="FromRole_UnitOfMeasure_2_UnitOfMeasure"/>
+                <End Type="com.sap.TEA.TestApplication.UnitOfMeasure" Multiplicity="1" Role="ToRole_UnitOfMeasure_2_UnitOfMeasure"/>
+            </Association>
+            <EntityContainer Name="com_sap_TEA_TestApplication_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Teams" EntityType="com.sap.TEA.TestApplication.Team" sap:content-version="1"/>
+                <EntitySet Name="Employees" EntityType="com.sap.TEA.TestApplication.Worker" sap:updatable="false" sap:content-version="1"/>
+                <EntitySet Name="Employees_Expand" EntityType="com.sap.TEA.TestApplication.Worker" sap:updatable="false" sap:content-version="1"/>
+                <EntitySet Name="Employees_Deltalink" EntityType="com.sap.TEA.TestApplication.Worker_Deltalink" sap:content-version="1"/>
+                <EntitySet Name="MassData" EntityType="com.sap.TEA.TestApplication.MassDataEntity" sap:content-version="1"/>
+                <EntitySet Name="TypeOneEntityCollection" EntityType="com.sap.TEA.TestApplication.TypeOneEntity" sap:content-version="1"/>
+                <EntitySet Name="ErrorCases" EntityType="com.sap.TEA.TestApplication.ErrorCase" sap:content-version="1"/>
+                <EntitySet Name="EquipmentSet" EntityType="com.sap.TEA.TestApplication.Equipment" sap:updatable="false" sap:content-version="1"/>
+                <EntitySet Name="Annotation_Documentation_Collection" EntityType="com.sap.TEA.TestApplication.Annotation_Documentation_Entity" sap:content-version="1"/>
+                <EntitySet Name="EdmTypesCollection" EntityType="com.sap.TEA.TestApplication.EdmTypes" sap:content-version="1"/>
+                <EntitySet Name="Decimals" EntityType="com.sap.TEA.TestApplication.Decimal" sap:content-version="1"/>
+                <EntitySet Name="Managers" EntityType="com.sap.TEA.TestApplication.Manager" sap:content-version="1"/>
+                <EntitySet Name="ManagerNonDDICs" EntityType="com.sap.TEA.TestApplication.ManagerNonDDIC" sap:content-version="1"/>
+                <EntitySet Name="SensitiveDataCollection" EntityType="com.sap.TEA.TestApplication.SensitiveData" sap:content-version="1"/>
+                <EntitySet Name="OwnSensitiveDataCollection" EntityType="com.sap.TEA.TestApplication.SensitiveData" sap:content-version="1"/>
+                <EntitySet Name="Conversions" EntityType="com.sap.TEA.TestApplication.Conversion" sap:content-version="1"/>
+                <EntitySet Name="Employees_Plus" EntityType="com.sap.TEA.TestApplication.Employee_Plus" sap:updatable="false" sap:content-version="1"/>
+                <EntitySet Name="Auto_Expands" EntityType="com.sap.TEA.TestApplication.Auto_Expand" sap:content-version="1"/>
+                <EntitySet Name="Auto_Expands_2" EntityType="com.sap.TEA.TestApplication.Auto_Expand_2" sap:content-version="1"/>
+                <EntitySet Name="DI_TEST_LEK_SURVEYCollection" EntityType="com.sap.TEA.TestApplication.DI_TEST_LEK_SURVEY" sap:content-version="1"/>
+                <EntitySet Name="DI_TEST_SURVEY_CWCollection" EntityType="com.sap.TEA.TestApplication.DI_TEST_SURVEY_CW" sap:content-version="1"/>
+                <EntitySet Name="DI_TEST_SURVEY_DATACollection" EntityType="com.sap.TEA.TestApplication.DI_TEST_SURVEY_DATA" sap:content-version="1"/>
+                <EntitySet Name="DI_TEST_CHANGED_FIELDCollection" EntityType="com.sap.TEA.TestApplication.DI_TEST_CHANGED_FIELD" sap:content-version="1"/>
+                <EntitySet Name="DI_TEST_VALUE_DESCRIPTIONCollection" EntityType="com.sap.TEA.TestApplication.DI_TEST_VALUE_DESCRIPTION" sap:content-version="1"/>
+                <EntitySet Name="ST_TestCollection" EntityType="com.sap.TEA.TestApplication.ST_Test" sap:content-version="1"/>
+                <EntitySet Name="ST_1Collection" EntityType="com.sap.TEA.TestApplication.ST_1" sap:content-version="1"/>
+                <EntitySet Name="SoftStates" EntityType="com.sap.TEA.TestApplication.SoftState" sap:content-version="1"/>
+                <EntitySet Name="Drafts" EntityType="com.sap.TEA.TestApplication.Draft" sap:content-version="1"/>
+                <EntitySet Name="Prices" EntityType="com.sap.TEA.TestApplication.Price" sap:content-version="1"/>
+                <EntitySet Name="VL_ID_ES" EntityType="com.sap.TEA.TestApplication.VL_ID" sap:content-version="1"/>
+                <EntitySet Name="VL_VL_ID_ES" EntityType="com.sap.TEA.TestApplication.VL_VL_ID" sap:content-version="1"/>
+                <EntitySet Name="VL_COUNTRY_DEEP_ES" EntityType="com.sap.TEA.TestApplication.VL_COUNTRY_DEEP" sap:content-version="1"/>
+                <EntitySet Name="VL_FLIGHT_DETAILS_AIRPORT_TO_ES" EntityType="com.sap.TEA.TestApplication.VL_FLIGHT_DETAILS_AIRPORT_TO" sap:content-version="1"/>
+                <EntitySet Name="EmployeePictures" EntityType="com.sap.TEA.TestApplication.EmployeePicture" sap:content-version="1"/>
+                <EntitySet Name="UnitOfMeasures" EntityType="com.sap.TEA.TestApplication.UnitOfMeasure" sap:content-version="1"/>
+                <EntitySet Name="EXPAND_CONVERSION" EntityType="com.sap.TEA.TestApplication.ET_EXCONV" sap:content-version="1"/>
+                <EntitySet Name="NullableProperties" EntityType="com.sap.TEA.TestApplication.NullableProperties" sap:content-version="1"/>
+                <AssociationSet Name="Team_4_Employees_Expand" Association="com.sap.TEA.TestApplication.Team_of_Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Employees_Expand" Role="FromRole_Team_of_Employee"/>
+                    <End EntitySet="Teams" Role="ToRole_Team_of_Employee"/>
+                </AssociationSet>
+                <AssociationSet Name="Team_2_Employee_Deltalink_12345678901234" Association="com.sap.TEA.TestApplication.Team_2_Employee_Deltalink_12345678901234" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Teams" Role="FromRole_Team_2_Employee_Deltalink_12345678901234"/>
+                    <End EntitySet="Employees_Deltalink" Role="ToRole_Team_2_Employee_Deltalink_12345678901234"/>
+                </AssociationSet>
+                <AssociationSet Name="AssocSetManagerTeam" Association="com.sap.TEA.TestApplication.Team_of_Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Managers" Role="FromRole_Team_of_Employee"/>
+                    <End EntitySet="Teams" Role="ToRole_Team_of_Employee"/>
+                </AssociationSet>
+                <AssociationSet Name="AssocSetManagerNonDDICTeam" Association="com.sap.TEA.TestApplication.Team_of_ManagerNonDDIC" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ManagerNonDDICs" Role="FromRole_Team_of_ManagerNonDDIC"/>
+                    <End EntitySet="Teams" Role="ToRole_Team_of_ManagerNonDDIC"/>
+                </AssociationSet>
+                <AssociationSet Name="EmployeeCollection_4_MassData" Association="com.sap.TEA.TestApplication.MassData_2_Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="MassData" Role="FromRole_MassData_2_Employee"/>
+                    <End EntitySet="Employees" Role="ToRole_MassData_2_Employee"/>
+                </AssociationSet>
+                <AssociationSet Name="A1616_AssocSet" Association="com.sap.TEA.TestApplication.A1616" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DI_TEST_LEK_SURVEYCollection" Role="FromRole_A1616"/>
+                    <End EntitySet="DI_TEST_SURVEY_CWCollection" Role="ToRole_A1616"/>
+                </AssociationSet>
+                <AssociationSet Name="A756_AssocSet" Association="com.sap.TEA.TestApplication.A756" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DI_TEST_SURVEY_DATACollection" Role="FromRole_A756"/>
+                    <End EntitySet="DI_TEST_VALUE_DESCRIPTIONCollection" Role="ToRole_A756"/>
+                </AssociationSet>
+                <AssociationSet Name="A725_AssocSet" Association="com.sap.TEA.TestApplication.A725" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DI_TEST_SURVEY_DATACollection" Role="FromRole_A725"/>
+                    <End EntitySet="DI_TEST_CHANGED_FIELDCollection" Role="ToRole_A725"/>
+                </AssociationSet>
+                <AssociationSet Name="Employee_2_Equipment_AssocSet" Association="com.sap.TEA.TestApplication.Employee_2_Equipment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Employees" Role="FromRole_Employee_2_Equipment"/>
+                    <End EntitySet="EquipmentSet" Role="ToRole_Employee_2_Equipment"/>
+                </AssociationSet>
+                <AssociationSet Name="AssocSetOwnSensitiveData" Association="com.sap.TEA.TestApplication.OwnSensitiveData" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Employees" Role="FromRole_OwnSensitiveData"/>
+                    <End EntitySet="OwnSensitiveDataCollection" Role="ToRole_OwnSensitiveData"/>
+                </AssociationSet>
+                <AssociationSet Name="AssocSetExpanders" Association="com.sap.TEA.TestApplication.Employee_2_Auto_Expand" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Employees" Role="FromRole_Employee_2_Auto_Expand"/>
+                    <End EntitySet="Auto_Expands_2" Role="ToRole_Employee_2_Auto_Expand"/>
+                </AssociationSet>
+                <AssociationSet Name="Team_4_Employee" Association="com.sap.TEA.TestApplication.Team_of_Employee" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Employees" Role="FromRole_Team_of_Employee"/>
+                    <End EntitySet="Teams" Role="ToRole_Team_of_Employee"/>
+                </AssociationSet>
+                <AssociationSet Name="ASSET_EXCONV" Association="com.sap.TEA.TestApplication.AS_EXCONV" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="EXPAND_CONVERSION" Role="FromRole_AS_EXCONV"/>
+                    <End EntitySet="EXPAND_CONVERSION" Role="ToRole_AS_EXCONV"/>
+                </AssociationSet>
+                <AssociationSet Name="A1615_AssocSet" Association="com.sap.TEA.TestApplication.A1615" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DI_TEST_SURVEY_CWCollection" Role="FromRole_A1615"/>
+                    <End EntitySet="DI_TEST_SURVEY_DATACollection" Role="ToRole_A1615"/>
+                </AssociationSet>
+                <AssociationSet Name="TO_TEAM_AssocSet" Association="com.sap.TEA.TestApplication.TO_TEAM" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Conversions" Role="FromRole_TO_TEAM"/>
+                    <End EntitySet="Teams" Role="ToRole_TO_TEAM"/>
+                </AssociationSet>
+                <AssociationSet Name="AssocSetManager2Team" Association="com.sap.TEA.TestApplication.Manager_2_Team" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Managers" Role="FromRole_Manager_2_Team"/>
+                    <End EntitySet="Teams" Role="ToRole_Manager_2_Team"/>
+                </AssociationSet>
+                <AssociationSet Name="Team_2_Type_1_AssocSet" Association="com.sap.TEA.TestApplication.Team_2_Type_1" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Teams" Role="FromRole_Team_2_Type_1"/>
+                    <End EntitySet="TypeOneEntityCollection" Role="ToRole_Team_2_Type_1"/>
+                </AssociationSet>
+                <AssociationSet Name="AssocSetOwnSensitiveDataMan" Association="com.sap.TEA.TestApplication.OwnSensitiveData" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Managers" Role="FromRole_OwnSensitiveData"/>
+                    <End EntitySet="OwnSensitiveDataCollection" Role="ToRole_OwnSensitiveData"/>
+                </AssociationSet>
+                <AssociationSet Name="Team_2_Employees_AssocSet" Association="com.sap.TEA.TestApplication.Team_2_Employees" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Teams" Role="FromRole_Team_2_Employees"/>
+                    <End EntitySet="Employees" Role="ToRole_Team_2_Employees"/>
+                </AssociationSet>
+                <AssociationSet Name="UnitOfMeasure_4_UnitOfMeasure" Association="com.sap.TEA.TestApplication.UnitOfMeasure_2_UnitOfMeasure" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="UnitOfMeasures" Role="FromRole_UnitOfMeasure_2_UnitOfMeasure"/>
+                    <End EntitySet="UnitOfMeasures" Role="ToRole_UnitOfMeasure_2_UnitOfMeasure"/>
+                </AssociationSet>
+                <AssociationSet Name="AssocSetOwnSensitiveDataExp" Association="com.sap.TEA.TestApplication.OwnSensitiveData" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Employees_Expand" Role="FromRole_OwnSensitiveData"/>
+                    <End EntitySet="OwnSensitiveDataCollection" Role="ToRole_OwnSensitiveData"/>
+                </AssociationSet>
+                <AssociationSet Name="Conversions_4_MassData" Association="com.sap.TEA.TestApplication.MassData_2_Conversion" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="MassData" Role="FromRole_MassData_2_Conversion"/>
+                    <End EntitySet="Conversions" Role="ToRole_MassData_2_Conversion"/>
+                </AssociationSet>
+                <AssociationSet Name="AssocSetExpExpanders" Association="com.sap.TEA.TestApplication.Employee_2_Auto_Expand" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Employees_Expand" Role="FromRole_Employee_2_Auto_Expand"/>
+                    <End EntitySet="Auto_Expands_2" Role="ToRole_Employee_2_Auto_Expand"/>
+                </AssociationSet>
+                <AssociationSet Name="EmployeeExp_2_Equipment_AssSet" Association="com.sap.TEA.TestApplication.Employee_2_Equipment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Employees_Expand" Role="FromRole_Employee_2_Equipment"/>
+                    <End EntitySet="EquipmentSet" Role="ToRole_Employee_2_Equipment"/>
+                </AssociationSet>
+                <FunctionImport Name="GetAtypeOneEntity" ReturnType="com.sap.TEA.TestApplication.TypeOneEntity" EntitySet="TypeOneEntityCollection" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.TypeOneEntity">
+                    <Parameter Name="Id" Type="Edm.String" Mode="In" MaxLength="16" sap:label="Field of length 16"/>
+                </FunctionImport>
+                <FunctionImport Name="GetEmployeeSalary" ReturnType="com.sap.TEA.TestApplication.CT_Salary" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.Worker"/>
+                <FunctionImport Name="SetEmployeeSalary" ReturnType="com.sap.TEA.TestApplication.CT_Salary" m:HttpMethod="PUT" sap:action-for="com.sap.TEA.TestApplication.Worker">
+                    <Parameter Name="Id" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Identifier"/>
+                    <Parameter Name="Amount" Type="Edm.Decimal" Mode="In" Precision="9" Scale="2" sap:label="Salary Amount"/>
+                </FunctionImport>
+                <FunctionImport Name="GetEmployeeBonus" ReturnType="com.sap.TEA.TestApplication.CT_Bonus" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.Worker">
+                    <Parameter Name="Id" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Identifier"/>
+                </FunctionImport>
+                <FunctionImport Name="SetEmployeeBonus" ReturnType="com.sap.TEA.TestApplication.CT_Bonus" m:HttpMethod="PUT" sap:action-for="com.sap.TEA.TestApplication.Worker">
+                    <Parameter Name="Id" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Identifier"/>
+                </FunctionImport>
+                <FunctionImport Name="GetEmployeeBonuses" ReturnType="Collection(com.sap.TEA.TestApplication.CT_Bonus)" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.Worker">
+                    <Parameter Name="Id" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Identifier"/>
+                </FunctionImport>
+                <FunctionImport Name="GetEmployeeBonusNC" ReturnType="com.sap.TEA.TestApplication.CT_BonusNC" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.Worker">
+                    <Parameter Name="Id" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Identifier"/>
+                </FunctionImport>
+                <FunctionImport Name="GetEmployeeBonusesNC" ReturnType="Collection(com.sap.TEA.TestApplication.CT_BonusNC)" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.Worker">
+                    <Parameter Name="Id" Type="Edm.String" Mode="In" MaxLength="4" sap:label="Identifier"/>
+                </FunctionImport>
+                <FunctionImport Name="GetEdmDefault" ReturnType="com.sap.TEA.TestApplication.CT_EdmDefault" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.Worker">
+                    <Parameter Name="Id" Type="Edm.String" Mode="In" Nullable="false"/>
+                </FunctionImport>
+                <FunctionImport Name="GetEdmDefaults" ReturnType="Collection(com.sap.TEA.TestApplication.CT_EdmDefault)" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.Worker">
+                    <Parameter Name="Id" Type="Edm.String" Mode="In" Nullable="false"/>
+                </FunctionImport>
+                <FunctionImport Name="GetComplexBonus" ReturnType="com.sap.TEA.TestApplication.CT_BonusDeep" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.Worker">
+                    <Parameter Name="Id" Type="Edm.String" Mode="In" Nullable="false"/>
+                </FunctionImport>
+                <FunctionImport Name="CreateEquipment" ReturnType="com.sap.TEA.TestApplication.Equipment" EntitySet="EquipmentSet" m:HttpMethod="POST" sap:action-for="com.sap.TEA.TestApplication.Worker">
+                    <Parameter Name="EmployeeId" Type="Edm.String" Mode="In" Nullable="false"/>
+                </FunctionImport>
+                <FunctionImport Name="GetEmployees" ReturnType="Collection(com.sap.TEA.TestApplication.Worker)" EntitySet="Employees" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.Worker"/>
+                <FunctionImport Name="GetPrices" ReturnType="com.sap.TEA.TestApplication.Price" EntitySet="Prices" m:HttpMethod="POST" sap:action-for="com.sap.TEA.TestApplication.Price"/>
+                <FunctionImport Name="SessionStart" ReturnType="Collection(com.sap.TEA.TestApplication.SoftState)" EntitySet="SoftStates" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.SoftState"/>
+                <FunctionImport Name="SessionEnd" ReturnType="Collection(com.sap.TEA.TestApplication.SoftState)" EntitySet="SoftStates" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.SoftState"/>
+                <FunctionImport Name="FunctionImportAnnoTest" ReturnType="com.sap.TEA.TestApplication.Worker" EntitySet="Employees" m:HttpMethod="GET" sap:action-for="com.sap.TEA.TestApplication.Worker">
+                    <Parameter Name="Datetime" Type="Edm.DateTime" Mode="In" Precision="0" sap:display-format="Date"/>
+                </FunctionImport>
+            </EntityContainer>
+            <Annotations Target="Products" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Org.OData.Core.V1.OptimisticConcurrencyControl" Bool="true"/>
+            </Annotations>
+            <Annotations Target="EPMDemoQualifier.PurchaseOrderItem2" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.Updateble" Bool="true"/>
+            </Annotations>
+            <Annotations Target="EPMDemoQualifier.PurchaseOrder/GrossAmount" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.AcceptableMediaTypes" Qualifier="iPad">
+                    <Collection>
+                        <String>image/jpeg</String>
+                        <String>image/gif</String>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo" Qualifier="iPad">
+                    <Record Type="Some_Type">
+                        <PropertyValue Property="ValueID">
+                            <Collection>
+                                <String>Inside a collection in a record</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="EnumTest" EnumMember="org.example.ColorType.Yellow"/>
+                        <PropertyValue Property="IntTest" Int="42"/>
+                        <PropertyValue Property="ImageUrl" PropertyPath="Image/URL"/>
+                        <PropertyValue Property="Title">
+                            <Record>
+                                <PropertyValue Property="Label" NavigationPropertyPath="MyProducts"/>
+                                <PropertyValue Property="Label_date" Date="2015-01-01"/>
+                                <PropertyValue Property="Label_datetimeoffset" DateTimeOffset="2014-03-25T11:33:55.112233Z"/>
+                                <PropertyValue Property="Label_decimal" Decimal="1234567890.12345678901234"/>
+                                <PropertyValue Property="Label_float" Float="1.2345678901234560E+10"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Record Type="UI.ReferenceURLFacet">
+                        <PropertyValue Property="Url">
+                            <Apply Function="odata.concat">
+                                <String>/epm_http/purchase/PurchaseOrderCollection?$filter=SupplierName eq '</String>
+                                <Path>Name</Path>
+                                <String>'</String>
+                                <Apply Function="Use.Constants.Of./iwbep/if_mgw_vocan_function.instead">
+                                    <String>This is just a test and not reasonable</String>
+                                </Apply>
+                            </Apply>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="EPMDemo.PurchaseOrderItem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SupplierNav">
+                    <UrlRef>
+                        <Apply Function="odata.fillUriTemplate"/>
+                    </UrlRef>
+                </Annotation>
+                <Annotation Term="SupplierNav2">
+                    <Apply Function="odata.fillUriTemplate">
+                        <String>http://example.or:1234/sap/opu/megaservice.srv/Suppliers(para1={P0},para2='EineKonstante')</String>
+                        <LabeledElement Name="P0">
+                            <Apply Function="odata.uriEncode">
+                                <Path>ProductID</Path>
+                            </Apply>
+                        </LabeledElement>
+                    </Apply>
+                </Annotation>
+                <Annotation Term="org.example.display.DisplayName">
+                    <LabeledElement Name="CustomerFirstName" Path="FirstName"/>
+                </Annotation>
+                <Annotation Term="org.example.display.DisplayName2">
+                    <LabeledElementReference>CustomerFirstName</LabeledElementReference>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="EPMDemo.PurchaseOrderItemEnabled" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="POIEnabled">
+                    <Not>
+                        <Or>
+                            <Gt>
+                                <Int>3</Int>
+                                <EnumMember>Common:FieldControlType/Hidden</EnumMember>
+                            </Gt>
+                            <Ne>
+                                <Int>3</Int>
+                                <Int>7</Int>
+                            </Ne>
+                        </Or>
+                        <Annotation Term="16" Qualifier="16_1"/>
+                        <Annotation Term="03" Qualifier="03_1"/>
+                    </Not>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="Texts" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Text Types">
+                    <Record Type="Text Types">
+                        <PropertyValue Property="Text Element" String=""/>
+                        <PropertyValue Property="Data element from DDIC field" String="Time"/>
+                        <PropertyValue Property="Data element from structure" String="Payment currency"/>
+                        <PropertyValue Property="Data element from local type" String="Character Field of Length 12"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Text Collection">
+                    <Collection>
+                        <String/>
+                        <String/>
+                        <String>Payment currency</String>
+                        <String>Payment currency</String>
+                        <String>Currency</String>
+                        <String>Paymnt currency</String>
+                        <String>Message Class</String>
+                        <String>OTR text example for tea</String>
+                        <String>Alternative OTR text example for tea</String>
+                        <String>Yet another alternative OTR text example for tea</String>
+                        <String>Yet another alternative OTR text example for tea</String>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="TEA_TEST_APPLICATION.VALUE_LIST/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="com.sap.vocabularies.Common.v1.ValueList" Int="16032011"/>
+            </Annotations>
+            <Annotations Target="TEA_TEST_APPLICATION.VL_ID/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="com.sap.vocabularies.Common.v1.ValueList" Int="16032011"/>
+            </Annotations>
+            <Annotations Target="TEA_TEST_APPLICATION.Booking/Address/Country/CountryID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="com.sap.vocabularies.Common.v1.ValueList" Int="16032011"/>
+            </Annotations>
+            <Annotations Target="TEA_TEST_APPLICATION.VALUE_LIST/NAME" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="FieldControl1"/>
+                <Annotation Term="com.sap.vocabularies.Common.v1.ValueList" Int="17042011"/>
+                <Annotation Term="FieldControl2"/>
+            </Annotations>
+            <Annotations Target="TEA_TEST_APPLICATION.FlightDetails/airportTo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="com.sap.vocabularies.Common.v1.ValueList"/>
+            </Annotations>
+            <Annotations Target="com.sap.TEA.TestApplication.com_sap_TEA_TestApplication_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
+                    <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
+                        <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="http://aurora.sapvistahub.com:50000/sap/opu/odata/IWBEP/TEA_TEST_APPLICATION/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://aurora.sapvistahub.com:50000/sap/opu/odata/IWBEP/TEA_TEST_APPLICATION;v=2/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

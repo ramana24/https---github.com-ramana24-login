@@ -4,7 +4,7 @@
 			<pages>
 				<Page id="page" title="{i18n>title}">
 					<content>
-						<Panel expandable="true" expanded="true" headerText="Login Page" width="auto"
+						<Panel expandable="true" expanded="false" headerText="Login Page" width="auto"
 							class="sapUiResponsiveMargin">
 							<content>
 								<VBox width="100%" class="sapUiResponsiveMargin ">
@@ -53,7 +53,7 @@
 							</content>
 						</Panel>
 
-						<Panel expandable="false" expanded="true" headerText="Truck In/Out Tracker " width="auto"
+						<Panel expandable="true" expanded="false" headerText="Truck In/Out Tracker " width="auto"
 						class="sapUiResponsiveMargin">
 
 <HBox> <Label class="sapUiTinyMargin" text="Truck 1 " required="true"></Label>
@@ -90,8 +90,8 @@
 <HBox class=" sapUiResponsiveMargin"> <Label class="sapUiLargeMargin" text=""> </Label> 
 	
 	<HBox> 
-	<Button class="sapUiSmallMarginBegin" text="Save"></Button>
-	<Button class="sapUiSmallMarginBegin" text="Reset"></Button> </HBox>
+	<Button class="sapUiSmallMarginBegin" text="Save" ></Button>
+	<Button class="sapUiSmallMarginBegin" text="Reset" press="onReset"></Button> </HBox>
 
 </HBox>
 				
@@ -123,44 +123,76 @@
 
 							
 								<Label text="Truck" required="true"/>
-								<Input id="name" value="{SupplierName}" />
+								<Input id="idTruckId" value="{SupplierName}" />
 								<Label text="Plant Src"  required="true"/>
-								<Input value="{Street}">
+								<Input id="idPlantSrc" value="{Street}">
 								</Input>
 								
 								<Label text="Plant Dst" required="false"/>
-								<Input value="{ZIPCode}">
-									<layoutData>
-										<l:GridData span="XL1 L2 M2 S4" />
-									</layoutData>
+								<Input id="idPlantDst" value="{ZIPCode}">
+									
 								</Input>
 								<Label text="Date" required="true" />
-								<DatePicker ></DatePicker>
+								<DatePicker id="idToday" dateValue=""></DatePicker>
 								<Label text="In /Out Time"  required="true"/>
-								<Select id="country" selectedKey="{Country}">
+								<Select id="idInTime" selectedKey="{Country}">
 									<items>
-										<core:Item text="9 Am" key="England"/>
-										<core:Item text="10 am" key="Germany"/>
-										<core:Item text=" 11 Am" key="USA"/>
+										<core:Item text="9 Am" key="1"/>
+										<core:Item text="10 am" key="2"/>
+										<core:Item text=" 11 Am" key="3"/>
 									</items>
 								</Select>
 							
-								<Select id="InTime"
+								<Select id="idOutTime"
 								selectedKey="{Country}">
 									<items>
-										<core:Item text="9am" key="England"/>
-										<core:Item text="10 Am" key="Germany"/>
-										<core:Item text="11 am" key="USA"/>
+										<core:Item text="9am" key="1"/>
+										<core:Item text="10 Am" key="2"/>
+										<core:Item text="11 am" key="3"/>
 									</items>
 								</Select>
 
 								<Label></Label>
-								<Button type="Accept" text="Save"></Button>
-								
-								<Button type="Reject" text="Cancel"></Button>
+								<Button type="Accept" text="Save" press="onSave"></Button>
+								<Button type="Accept" text="Update" press="onupdate"></Button>
+								<Button type="Accept" text="Display" press="onDisplay"></Button>
+								<Button type="Reject" text="Clear" press="onClear"></Button>
 							</f:content>
 						</f:SimpleForm>
 
+					 <Table id="idTable"
+						inset="false"
+						visible="false"
+					>
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<Title text="Truck Details" level="H2"/>
+									<ToolbarSpacer />
+									<Button text="Delete"></Button>
+									
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+						
+						<columns>
+							<Column
+								width="12em">
+								<Text text="Id" />
+							</Column>
+							
+						</columns>
+						<items>
+							<ColumnListItem vAlign="Middle">
+								<cells>
+									<ObjectIdentifier
+										title="{Id}"
+										/>
+									
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
 						</Panel>
 
 					</content>
